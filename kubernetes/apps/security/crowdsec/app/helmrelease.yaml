@@ -1,0 +1,38 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: crowdsec
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: crowdsec
+      version: 0.9.7
+      sourceRef:
+        kind: HelmRepository
+        name: crowdsec
+        namespace: flux-system
+      interval: 30m
+  values:
+    container_runtime: containerd
+    image:
+      tag: "v1.5.2"
+    agent:
+      acquisition:
+        - namespace: network
+          podName: ingress-nginx-controller-*
+          program: nginx
+
+      env:
+      # As we are running Nginx, we want to install the Nginx collection
+        - name: COLLECTIONS
+          value: "crowdsecurity/nginx"
+        - name: PARSERS
+          value: "crowdsecurity/cri-logs"
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 150m
+          memory: 256Mi

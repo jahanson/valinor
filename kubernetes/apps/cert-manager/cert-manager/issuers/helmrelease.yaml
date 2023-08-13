@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: dnsimple-issuer
+  namespace: cert-manager
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: cert-manager-webhook-dnsimple
+      version: 0.0.6
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: jahanson
+        namespace: flux-system
+
+  values:
+    controller:
+      annotations:
+        reloader.stakater.com/auto: "true"
+    dnsimple:
+      token:
+        valueFrom:
+          secretKeyRef:
+            name: dnsimple-api-token
+            key: api-token
+    clusterIssuer:
+      email:
+        valueFrom:
+          secretKeyRef:
+            name: dnsimple-api-token
+            key: letsencrypt-email

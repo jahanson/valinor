@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-server
+  namespace: default
+spec:
+  # serviceAccount: tailscale
+  containers:
+    - name: ubuntu
+      image: ubuntu:latest@sha256:0bced47fffa3361afa981854fcabcd4577cd43cebbb808cea2b1f33a3dd7f508
+      command: ["/bin/bash", "-c", "while true; do sleep 10; done"]
+      resources:
+        requests:
+          cpu: 50m
+          memory: 443M
+        limits:
+          cpu: 323m
+          memory: 886M
+    # - name: tailscale
+    #   imagePullPolicy: Always
+    #   image: "ghcr.io/tailscale/tailscale:v1.42.0"
+    #   env:
+    #     - name: TS_KUBE_SECRET
+    #       value: "tailscale-state"
+    #     - name: TS_USERSPACE
+    #       value: "false"
+    #     - name: TS_EXTRA_ARGS
+    #       value: "--accept-routes"
+    #   envFrom:
+    #     - secretRef:
+    #         name: tailscale-auth
+    #   resources:
+    #     requests:
+    #       cpu: 50m
+    #       memory: 50Mi
+    #     limits:
+    #       cpu: 100m
+    #       memory: 128Mi
+    #   securityContext:
+    #     capabilities:
+    #       add:
+    #         - NET_ADMIN

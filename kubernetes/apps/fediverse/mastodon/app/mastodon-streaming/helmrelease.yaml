@@ -1,0 +1,75 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app mastodon-streaming
+  namespace: fediverse
+  labels:
+    app: mastodon
+    component: streaming
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  values:
+    controller:
+      replicas: 2
+      strategy: Recreate
+      annotations:
+        reloader.stakater.com/auto: "true"
+      labels:
+        app: mastodon
+        component: streaming
+    image:
+      repository: ghcr.io/mastodon/mastodon
+      tag: v4.1.6@sha256:51405bec6529860c88640bbca3d30bf3a9a82456a3fdae122dc52f4f941808ff
+    command: [
+      "node",
+      "./streaming"
+    ]
+    envFrom:
+      - secretRef:
+          name: mastodon-secret
+    env:
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+      DB_SSLMODE: "no-verify"
+      DB_NAME: "$(CP_MASTODON_STREAMING)"
+      DB_PORT: "$(DB_PORT)"
+      PREPARED_STATEMENTS: "false" # neccessary for pgbouncer
+    livenessProbe:
+      httpGet:
+        path: /api/v1/streaming/health
+        port: streaming
+    readinessProbe:
+      httpGet:
+        path: /api/v1/streaming/health
+        port: streaming
+    resources:
+      requests:
+        cpu: 15m
+        memory: 50Mi
+      # limits:
+      #   cpu: 500m
+      #   memory: 250Mi
+    service:
+      main:
+        ports:
+          http:
+            enabled: false
+          streaming:
+            port: 4000
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values: ["mastodon-streaming"]
+            topologyKey: kubernetes.io/hostname

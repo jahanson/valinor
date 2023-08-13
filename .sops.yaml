@@ -1,0 +1,15 @@
+---
+creation_rules:
+  - path_regex: kubernetes/.*\.sops\.ya?ml
+    encrypted_regex: "^(data|stringData)$"
+    # Valinor
+    age: >-
+      age1f5pr5rss0n8z4d6r8kky9umr5g48tt03reuyjushw5kayrpsxvgsw80gsj
+  - path_regex: .*\.sops\.(env|ini|json|toml)
+    # Valinor
+    age: >-
+      age1f5pr5rss0n8z4d6r8kky9umr5g48tt03reuyjushw5kayrpsxvgsw80gsj
+  - path_regex: (ansible|terraform)/.*\.sops\.ya?ml
+    # Valinor
+    age: >-
+      age1f5pr5rss0n8z4d6r8kky9umr5g48tt03reuyjushw5kayrpsxvgsw80gsj

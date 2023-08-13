@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: cluster-apps-database-dragonflydb
+  namespace: flux-system
+spec:
+  interval: 30m
+  path: "./kubernetes/valinor/apps/database/dragonflydb/app"
+  prune: false
+  sourceRef:
+    kind: GitRepository
+    name: valinor
+  wait: false # no flux ks dependents

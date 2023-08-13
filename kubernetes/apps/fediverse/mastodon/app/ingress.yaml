@@ -1,0 +1,31 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mastodon-ingress
+  namespace: fediverse
+  annotations:
+    nginx.org/websocket-services: "mastodon-streaming"
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - &host valinor.social
+  rules:
+    - host: *host
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mastodon-web
+                port:
+                  number: 3000
+          - path: /api/v1/streaming
+            pathType: Prefix
+            backend:
+              service:
+                name: mastodon-streaming
+                port:
+                  number: 4000

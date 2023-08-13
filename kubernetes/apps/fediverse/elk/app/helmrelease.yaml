@@ -1,0 +1,75 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: elk
+  namespace: fediverse
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controller:
+      annotations:
+        reloader.stakater.com/auto: "true"
+
+    image:
+      repository: ghcr.io/elk-zone/elk
+      tag: v0.10.0@sha256:8cbc1d4627de0f9c81e1fa08bcbff251d42b43ea36f443e748eda25cdef1ee23
+
+    env:
+      NUXT_PUBLIC_DEFAULT_SERVER: "valinor.social"
+    # envFrom:
+    #   - secretRef:
+    #       name: elk-secret
+
+    podSecurityContext:
+      runAsUser: 911
+      runAsGroup: 911
+      fsGroup: 911
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 65539
+
+    service:
+      main:
+        ports:
+          http:
+            port: 5314
+
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          external-dns.alpha.kubernetes.io/target: ingress.valinor.social
+          nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        hosts:
+          - host: &host "elk.valinor.social"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - *host
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: elk-config
+        mountPath: /elk/data
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 64M
+      limits:
+        cpu: 46m
+        memory: 154M
