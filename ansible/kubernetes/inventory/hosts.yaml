@@ -1,0 +1,28 @@
+---
+kubernetes:
+  vars:
+    ansible_user: jahanson
+    ansible_ssh_port: 22
+  children:
+    master:
+      hosts:
+        eonwe:
+          ansible_host: 10.2.0.4
+        nienna:
+          ansible_host: 10.2.0.5
+        arlen:
+          ansible_host: 10.2.0.6
+    worker:
+      hosts:
+        aule:
+          ansible_host: 10.2.1.10
+          ceph_drives:
+            - /dev/disk/by-id/nvme-SAMSUNG_MZQL2960HCJR-00A07_S64FNE0RA01210
+        manwe:
+          ansible_host: 10.2.1.11
+          ceph_drives:
+            - /dev/disk/by-id/nvme-SAMSUNG_MZQL2960HCJR-00A07_S64FNE0R801843
+        varda:
+          ansible_host: 10.2.1.12
+          ceph_drives:
+            - /dev/disk/by-id/nvme-SAMSUNG_MZQL2960HCJR-00A07_S64FNE0R801309
