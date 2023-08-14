@@ -16,6 +16,7 @@ resources:
  - jahanson.yaml
  - jetstack.yaml
 #  - kubernetes-sigs-descheduler.yaml
+ - kyverno.yaml
  - kubernetes-sigs-metrics-server.yaml
  - kubernetes-sigs-external-dns.yaml
  - piraeus.yaml
