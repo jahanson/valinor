@@ -4,12 +4,12 @@ creation_rules:
     encrypted_regex: "^(data|stringData)$"
     # Valinor
     age: >-
-      age1f5pr5rss0n8z4d6r8kky9umr5g48tt03reuyjushw5kayrpsxvgsw80gsj
+      age1g786w8t40g9y29l33rfd4jqlwhrgsxsc7ped6uju60k54j0q3enql3kfve
   - path_regex: .*\.sops\.(env|ini|json|toml)
     # Valinor
     age: >-
-      age1f5pr5rss0n8z4d6r8kky9umr5g48tt03reuyjushw5kayrpsxvgsw80gsj
+      age1g786w8t40g9y29l33rfd4jqlwhrgsxsc7ped6uju60k54j0q3enql3kfve
   - path_regex: (ansible|terraform)/.*\.sops\.ya?ml
     # Valinor
     age: >-
-      age1f5pr5rss0n8z4d6r8kky9umr5g48tt03reuyjushw5kayrpsxvgsw80gsj
+      age1g786w8t40g9y29l33rfd4jqlwhrgsxsc7ped6uju60k54j0q3enql3kfve
