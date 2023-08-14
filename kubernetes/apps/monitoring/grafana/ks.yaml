@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: "./kubernetes/valinor/apps/monitoring/grafana/app"
+  path: "./kubernetes/apps/monitoring/grafana/app"
   prune: true
   sourceRef:
     kind: GitRepository

@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: ./kubernetes/valinor/apps/flux-system/add-ons/webhooks
+  path: ./kubernetes/apps/flux-system/add-ons/webhooks
   prune: true
   sourceRef:
     kind: GitRepository
@@ -24,7 +24,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 10m
-  path: ./kubernetes/valinor/apps/flux-system/add-ons/monitoring
+  path: ./kubernetes/apps/flux-system/add-ons/monitoring
   prune: true
   sourceRef:
     kind: GitRepository

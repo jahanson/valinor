@@ -8,6 +8,8 @@ spec:
   interval: 30m
   ref:
     branch: main
+  secretRef:
+    name: github-deploy-key
   url: ssh://github.com/jahanson/valinor
   ignore: |
     # exclude all

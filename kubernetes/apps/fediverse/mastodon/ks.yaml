@@ -8,7 +8,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/app"
+#   path: "./kubernetes/apps/fediverse/mastodon/app"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -26,7 +26,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/app/mastodon-web"
+#   path: "./kubernetes/apps/fediverse/mastodon/app/mastodon-web"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -45,7 +45,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/app/mastodon-streaming"
+#   path: "./kubernetes/apps/fediverse/mastodon/app/mastodon-streaming"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -64,7 +64,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/app/statsd"
+#   path: "./kubernetes/apps/fediverse/mastodon/app/statsd"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -80,7 +80,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/add-ons"
+#   path: "./kubernetes/apps/fediverse/mastodon/add-ons"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -98,7 +98,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/app/mastodon-sidekiq/local/high-priority"
+#   path: "./kubernetes/apps/fediverse/mastodon/app/mastodon-sidekiq/local/high-priority"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -117,7 +117,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/app/mastodon-sidekiq/local/low-volume"
+#   path: "./kubernetes/apps/fediverse/mastodon/app/mastodon-sidekiq/local/low-volume"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -136,7 +136,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/app/mastodon-sidekiq/remote/ingress"
+#   path: "./kubernetes/apps/fediverse/mastodon/app/mastodon-sidekiq/remote/ingress"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository
@@ -155,7 +155,7 @@
 #     substitution.flux.home.arpa/enabled: "true"
 # spec:
 #   interval: 10m
-#   path: "./kubernetes/valinor/apps/fediverse/mastodon/app/mastodon-sidekiq/remote/pull"
+#   path: "./kubernetes/apps/fediverse/mastodon/app/mastodon-sidekiq/remote/pull"
 #   prune: true
 #   sourceRef:
 #     kind: GitRepository

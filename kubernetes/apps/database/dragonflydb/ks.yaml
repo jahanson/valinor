@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  path: "./kubernetes/valinor/apps/database/dragonflydb/app"
+  path: "./kubernetes/apps/database/dragonflydb/app"
   prune: false
   sourceRef:
     kind: GitRepository

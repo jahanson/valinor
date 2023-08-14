@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: "./kubernetes/valinor/apps/monitoring/alertmanager/app"
+  path: "./kubernetes/apps/monitoring/alertmanager/app"
   prune: true
   sourceRef:
     kind: GitRepository

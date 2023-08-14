@@ -8,7 +8,7 @@ metadata:
     substitution.flux.home.arpa/enabled: "true"
 spec:
   interval: 30m
-  path: "./kubernetes/valinor/apps/security/crowdsec/app"
+  path: "./kubernetes/apps/security/crowdsec/app"
   prune: true
   sourceRef:
     kind: GitRepository
