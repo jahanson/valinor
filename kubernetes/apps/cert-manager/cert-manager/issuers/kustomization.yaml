@@ -6,4 +6,5 @@ resources:
   - ./externalsecret.yaml
   - ./issuer-letsencrypt-prod.yaml
   - ./issuer-letsencrypt-staging.yaml
+  - ./dnsimple-issuer-rbac.yaml
   - ./helmrelease.yaml
