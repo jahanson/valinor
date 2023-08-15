@@ -174,7 +174,7 @@ spec:
   dependsOn:
     - name: cluster-apps-cloudnative-pg
     - name: cluster-apps-external-secrets-stores
-  path: ./kubernetes/apps/database/cloudnative-pg/cluster
+  path: ./kubernetes/apps/fediverse/app/mastodon/cnpg
   prune: true
   sourceRef:
     kind: GitRepository
