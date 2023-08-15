@@ -33,11 +33,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://valinor-cnpg/
-      endpointURL:
-        valueFrom:
-          secretKeyRef:
-            name: cnpg-secret
-            key: CLOUDFLARE_R2_ENDPOINT
+      endpointURL: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
       serverName: postgres-v3
       s3Credentials:
         accessKeyId:
@@ -49,11 +45,7 @@ spec:
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
-        destinationPath:
-          valueFrom:
-            secretKeyRef:
-              name: cnpg-secret
-              key: CLOUDFLARE_R2_ENDPOINT
+        destinationPath: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
         s3Credentials:
         accessKeyId:
           name: cloudnative-pg-secret
