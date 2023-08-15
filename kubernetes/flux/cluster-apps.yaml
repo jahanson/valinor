@@ -11,10 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: valinor
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age
   postBuild:
     substituteFrom:
       - kind: ConfigMap
@@ -27,10 +23,6 @@ spec:
           name: not-used
           namespace: not-used
         spec:
-          decryption:
-            provider: sops
-            secretRef:
-              name: sops-age
           postBuild:
             substituteFrom:
               - kind: ConfigMap
