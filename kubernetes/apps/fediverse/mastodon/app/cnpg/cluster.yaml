@@ -26,7 +26,7 @@ spec:
     enablePodMonitor: true
   backup:
     recovery:
-      source: clusterBackup
+      source: &previousCluster postgres-v3
     retentionPolicy: 30d
     barmanObjectStore:
       wal:
@@ -43,16 +43,17 @@ spec:
           name: cloudnative-pg-secret
           key: aws-secret-access-key
   externalClusters:
-    - name: clusterBackup
+    - name: *previousCluster
       barmanObjectStore:
-        destinationPath: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
-        s3Credentials:
-        accessKeyId:
-          name: cloudnative-pg-secret
-          key: aws-access-key-id
-        secretAccessKey:
-          name: cloudnative-pg-secret
-          key: aws-secret-access-key
         wal:
-          maxParallel: 8
           compression: bzip2
+          maxParallel: 8
+        destinationPath: s3://valinor-cnpg/
+        endpointURL: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
+        s3Credentials:
+          accessKeyId:
+            name: cloudnative-pg-secret
+            key: aws-access-key-id
+          secretAccessKey:
+            name: cloudnative-pg-secret
+            key: aws-secret-access-key
