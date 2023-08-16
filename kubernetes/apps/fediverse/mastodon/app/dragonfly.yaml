@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/created-by: dragonfly-operator
   name: dragonfly-mastodon
 spec:
-  replicas: 3
+  replicas: 1
   resources:
     requests:
       cpu: 2000m
