@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: dragonfly-valinor
+  name: dragonfly-mastodon
   namespace: fediverse
 spec:
   interval: 30m
@@ -35,9 +35,10 @@ spec:
 
     resources:
       requests:
-        cpu: 1000m
-        memory: 6Gi
+        cpu: 2000m
+        memory: 8Gi
       limits:
+        cpu: 2000m
         memory: 8Gi
     extraArgs:
       - --dbfilename=dump
