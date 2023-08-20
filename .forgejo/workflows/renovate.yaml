@@ -1,34 +1,47 @@
+---
+name: Run Renovate
 
-on: [push,manual]
+on: [push]
+  workflow_call:
+    inputs:
+      dryRun:
+        description: "Dry-Run"
+        default: "false"
+        required: false
+        type: string
+      renovateLogLevel:
+        description: "Log-Level"
+        default: "debug"
+        required: false
+        type: string
+      configurationFile:
+        description: "Renovate configuration file"
+        default: ".github/renovate.json5"
+        required: false
+        type: string
+    secrets:
+      app_id:
+        description: "App ID of the application used to generate a token"
+        required: true
+      app_private_key:
+        description: "Private key of the application used to generate a token"
+        required: true
+
 jobs:
-  renovate-dry:
-    image: ghcr.io/renovatebot/renovate:36.52.2
-    pull: true
-    commands:
-      - renovate $${CI_REPO} jahanson/valinor
-    environment:
-      RENOVATE_PLATFORM: gitea
-      RENOVATE_ENDPOINT: https://git.hsn.dev
-      LOG_LEVEL: debug
-      RENOVATE_DRY_RUN: full
-    secrets:
-      - source: token
-        target: renovate_token
-    when:
-      - event: push
   renovate:
-    image: ghcr.io/visualon/renovate:36.52.2
-    pull: true
-    commands:
-      - renovate $${CI_REPO} jahanson/valinor
-    environment:
-      RENOVATE_PLATFORM: gitea
-      RENOVATE_ENDPOINT: https://git.hsn.dev
-      LOG_LEVEL: debug
-    secrets:
-      - source: token
-        target: renovate_token
-    when:
-      - event: cron
-        cron: renovate
-      - event: manual
+    name: Renovate
+    runs-on: docker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: '${{ secrets.token }}'
+
+      - name: Renovate
+        uses: renovatebot/github-action@v39.0.1
+        env:
+          DRY_RUN: ${{ inputs.dryRun }}
+          LOG_LEVEL: ${{ inputs.renovateLogLevel }}
+        with:
+          configurationFile: ${{ inputs.configurationFile }}
+          token: '${{ secrets.token }}'
