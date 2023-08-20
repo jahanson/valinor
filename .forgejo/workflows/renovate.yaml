@@ -1,18 +1,13 @@
 on: [push]
 jobs:
-  renovate:
-    name: Renovate
+  renovate-dry:
     runs-on: docker
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          token: '${{ secrets.token }}'
-
-      - name: Renovate
-        uses: renovatebot/github-action@v39.0.1
-        env:
-          # DRY_RUN: ${{ inputs.dryRun }}
-          LOG_LEVEL: debug
-        with:
-          token: '${{ secrets.token }}'
+      - uses: ghcr.io/renovatebot/renovate:36.52.2
+      - env:
+        RENOVATE_PLATFORM: gitea
+        RENOVATE_ENDPOINT: https://git.hsn.dev
+        LOG_LEVEL: debug
+        RENOVATE_DRY_RUN: full
+      - run: |
+          renovate $${CI_REPO} jahanson/valinor
