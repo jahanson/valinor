@@ -1,6 +1,3 @@
----
-name: Run Renovate
-
 on: [push]
   workflow_call:
     inputs:
