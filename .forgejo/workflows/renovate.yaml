@@ -1,12 +1,6 @@
-platform: linux/amd64
 
-when:
-  event:
-    - cron
-    - push
-    - manual
-
-pipeline:
+on: [push,manual]
+jobs:
   renovate-dry:
     image: ghcr.io/renovatebot/renovate:36.52.2
     pull: true
