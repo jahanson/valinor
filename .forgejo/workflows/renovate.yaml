@@ -10,9 +10,9 @@ jobs:
           RENOVATE_ENDPOINT: https://git.hsn.dev
           LOG_LEVEL: debug
           RENOVATE_DRY_RUN: full
-        cmd:
-          - 'renovate'
-          - jahanson/valinor
-    # steps:
-    #   - run: |
-    #       renovate $${CI_REPO} jahanson/valinor
+        # cmd:
+        #   - 'renovate'
+        #   - jahanson/valinor
+    steps:
+      - run: |
+          renovate jahanson/valinor
