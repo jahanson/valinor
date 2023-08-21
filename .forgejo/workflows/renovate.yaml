@@ -2,12 +2,17 @@ on: [push]
 jobs:
   renovate-dry:
     runs-on: docker
-    steps:
-      - uses: ghcr.io/renovatebot/renovate:36.52.2
-      - env:
-        RENOVATE_PLATFORM: gitea
-        RENOVATE_ENDPOINT: https://git.hsn.dev
-        LOG_LEVEL: debug
-        RENOVATE_DRY_RUN: full
-      - run: |
-          renovate $${CI_REPO} jahanson/valinor
+    services:
+      renovate:
+        image: ghcr.io/renovatebot/renovate:36.52.2
+        env:
+          RENOVATE_PLATFORM: gitea
+          RENOVATE_ENDPOINT: https://git.hsn.dev
+          LOG_LEVEL: debug
+          RENOVATE_DRY_RUN: full
+        cmd:
+          - 'renovate'
+          - jahanson/valinor
+    # steps:
+    #   - run: |
+    #       renovate $${CI_REPO} jahanson/valinor
