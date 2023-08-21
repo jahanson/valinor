@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: dragonfly
-      version: v1.7.1
+      version: v1.8.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
