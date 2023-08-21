@@ -23,7 +23,7 @@ spec:
 
     image:
       repository: ghcr.io/elk-zone/elk
-      tag: v0.10.0@sha256:8cbc1d4627de0f9c81e1fa08bcbff251d42b43ea36f443e748eda25cdef1ee23
+      tag: v0.10.1@sha256:35af058d211cddaa1d15063f2dd5cfba8791f54fc37966860067ddbbf2f61eb4
 
     env:
       NUXT_PUBLIC_DEFAULT_SERVER: "valinor.social"
