@@ -5,7 +5,6 @@
       "**/ansible/**/*.yaml": "ansible",
       "**/ansible/**/*.sops.yaml": "yaml",
       "**/ansible/**/inventory/**/*.yaml": "yaml",
-      "**/terraform/**/*.tf": "terraform",
       "**/kubernetes/**/*.sops.toml": "plaintext"
   },
   "material-icon-theme.folders.associations": {
@@ -14,7 +13,6 @@
       "charts": "kubernetes",
       "hack": "scripts",
       "repositories": "database",
-      "terraforms": "terraform",
       "vars": "other",
       // namespaces
       "cert-manager": "guard",
@@ -27,8 +25,7 @@
   "yaml.schemaStore.enable": true,
   "yaml.schemas": {
     "ansible": "ansible/**/*.yaml",
-    "kubernetes": "kubernetes/**/*.yaml",
-    "schemaservice://combinedschema/ansible": "file:///home/jahanson/projects/k3s-ops/ansible/kubernetes/inventory/hosts.yaml"
+    "kubernetes": "kubernetes/**/*.yaml"
   },
   "editor.fontFamily": "FiraCode Nerd Font",
   "editor.fontLigatures": true,
@@ -45,5 +42,5 @@
   "files.trimTrailingWhitespace": true,
   "ansible.python.interpreterPath": "/usr/bin/python3",
   "sops.defaults.ageKeyFile": "age.key",
-  "ansible.validation.lint.path": "~/projects/k3s-ops/.venv/bin/ansible-lint"
+  "ansible.validation.lint.path": "~/projects/valinor/.venv/bin/ansible-lint"
 }
