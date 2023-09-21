@@ -6,23 +6,9 @@ kubernetes:
   children:
     master:
       hosts:
-        eonwe:
-          ansible_host: 10.2.1.13
-        arlen:
-          ansible_host: 10.2.1.14
-        nienna:
-          ansible_host: 10.2.1.15
-    worker:
-      hosts:
-        aule:
-          ansible_host: 10.2.1.10
-          ceph_drives:
-            - /dev/disk/by-id/nvme-SAMSUNG_MZQL2960HCJR-00A07_S64FNE0RA01210
-        manwe:
-          ansible_host: 10.2.1.11
-          ceph_drives:
-            - /dev/disk/by-id/nvme-SAMSUNG_MZQL2960HCJR-00A07_S64FNE0R801843
-        varda:
-          ansible_host: 10.2.1.12
-          ceph_drives:
-            - /dev/disk/by-id/nvme-SAMSUNG_MZQL2960HCJR-00A07_S64FNE0R801309
+        valinor-1:
+          ansible_host: 10.2.0.3
+        valinor-2:
+          ansible_host: 10.2.0.4
+        valinor-3:
+          ansible_host: 10.2.0.5
