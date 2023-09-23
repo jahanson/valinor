@@ -18,9 +18,11 @@
             state: absent
             path: /var/lib/rook
         - name: Delete (/dev/mapper/ceph-*) # noqa: no-changed-when
-          ansible.builtin.shell: |
-            set -o pipefail
-            ls /dev/mapper/ceph-* | xargs -I% -- dmsetup remove_all --force % || true
+          ansible.builtin.shell:
+            executable: /bin/bash
+            cmd: |
+              set -o pipefail
+              ls /dev/mapper/ceph-* | xargs -I% -- dmsetup remove_all --force % || true
         - name: Delete (/dev/ceph-*) # noqa: no-changed-when
           ansible.builtin.command: rm -rf /dev/ceph-*
         - name: Delete (/dev/mapper/ceph--*) # noqa: no-changed-when
