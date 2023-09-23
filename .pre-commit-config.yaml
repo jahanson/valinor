@@ -14,7 +14,7 @@ repos:
       - id: yamllint
         args:
           - -c
-          - ".github/linters/.yamllint.yaml"
+          - ".yamllint.yaml"
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -29,7 +29,7 @@ repos:
       - id: check-executables-have-shebangs
 
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.5.3
+    rev: v1.5.4
     hooks:
       - id: forbid-crlf
       - id: forbid-tabs
