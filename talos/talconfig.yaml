@@ -25,6 +25,12 @@ nodes:
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
 
   - hostname: eonwe.hsn.dev
     disableSearchDomain: true
@@ -35,6 +41,12 @@ nodes:
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
 
   - hostname: arlen.hsn.dev
     disableSearchDomain: true
@@ -45,6 +57,13 @@ nodes:
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
+
 controlPlane:
   patches:
     - |-
