@@ -21,7 +21,7 @@ nodes:
     ipAddress: 10.2.0.3
     controlPlane: true
     installDiskSelector:
-      busPath: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_37145789
+      busPath: /dev/sda
     networkInterfaces:
       - interface: eth0
         dhcp: true
@@ -31,7 +31,7 @@ nodes:
     ipAddress: 10.2.0.5
     controlPlane: true
     installDiskSelector:
-      busPath: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_37145792
+      busPath: /dev/sda
     networkInterfaces:
       - interface: eth0
         dhcp: true
@@ -41,7 +41,7 @@ nodes:
     ipAddress: 10.2.0.4
     controlPlane: true
     installDiskSelector:
-      busPath: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_37145790
+      busPath: /dev/sda
     networkInterfaces:
       - interface: eth0
         dhcp: true
