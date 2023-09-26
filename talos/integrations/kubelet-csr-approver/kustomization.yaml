@@ -8,11 +8,11 @@ helmCharts:
     version: 1.0.5
     releaseName: kubelet-csr-approver
     includeCRDs: true
-    namespace: system-controllers
+    namespace: system
     valuesFile: values.yaml
 
 commonAnnotations:
   meta.helm.sh/release-name: kubelet-csr-approver
-  meta.helm.sh/release-namespace: system-controllers
+  meta.helm.sh/release-namespace: system
 commonLabels:
   app.kubernetes.io/managed-by: Helm
