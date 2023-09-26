@@ -6,15 +6,15 @@ kubernetes:
   children:
     master:
       hosts:
-        valinor-1:
+        aule:
           ansible_host: 10.2.0.3
           ceph_drives:
             - /dev/disk/by-id/scsi-0HC_Volume_37231496
-        valinor-2:
+        eonwe:
           ansible_host: 10.2.0.4
           ceph_drives:
             - /dev/disk/by-id/scsi-0HC_Volume_37231521
-        valinor-3:
+        arlen:
           ansible_host: 10.2.0.5
           ceph_drives:
             - /dev/disk/by-id/scsi-0HC_Volume_37231596
