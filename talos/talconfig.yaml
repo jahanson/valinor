@@ -28,7 +28,7 @@ nodes:
 
   - hostname: eonwe.hsn.dev
     disableSearchDomain: true
-    ipAddress: 10.2.0.4
+    ipAddress: 10.2.0.5
     controlPlane: true
     installDiskSelector:
       busPath: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_37145792
@@ -38,7 +38,7 @@ nodes:
 
   - hostname: arlen.hsn.dev
     disableSearchDomain: true
-    ipAddress: 10.2.0.5
+    ipAddress: 10.2.0.4
     controlPlane: true
     installDiskSelector:
       busPath: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_37145790
