@@ -1,0 +1,5 @@
+---
+providerRegex: |
+  ^(eonwe|aule|arlen)$
+
+bypassDnsResolution: true
