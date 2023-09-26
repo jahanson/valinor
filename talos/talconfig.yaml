@@ -50,6 +50,9 @@ controlPlane:
     - |-
       cluster:
         allowSchedulingOnMasters: true
+        network:
+          cni:
+            name: none
         proxy:
           disabled: true
         etcd:
@@ -62,6 +65,11 @@ controlPlane:
 
     - |-
       machine:
+        features:
+          kubePrism:
+            enabled: true
+            port: 7445
+
         files:
           - op: create
             path: /etc/cri/conf.d/20-customization.part
