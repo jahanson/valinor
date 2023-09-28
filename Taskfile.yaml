@@ -21,6 +21,7 @@ env:
 includes:
   volsync: .taskfiles/VolSync/Tasks.yaml
   precommit: .taskfiles/PreCommit/Tasks.yaml
+  rook: .taskfiles/rook/Taskfile.yaml
 
 tasks:
 
