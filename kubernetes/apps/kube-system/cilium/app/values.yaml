@@ -1,72 +1,12 @@
-autoDirectNodeRoutes: true
-bandwidthManager:
-  enabled: true
-  bbr: true
-bpf:
-  masquerade: true
-bgp:
-  enabled: false
-cluster:
-  name: valinor
-  id: 1
-containerRuntime:
-  integration: containerd
-endpointRoutes:
-  enabled: true
 cgroup:
   autoMount:
     enabled: false
   hostRoot: /sys/fs/cgroup
-hubble:
-  enabled: true
-  metrics:
-    enabled:
-      - dns:query
-      - drop
-      - tcp
-      - flow
-      - port-distribution
-      - icmp
-      - http
-    serviceMonitor:
-      enabled: true
-    dashboards:
-      enabled: true
-      annotations:
-        grafana_folder: Cilium
-  relay:
-    enabled: true
-    rollOutPods: true
-    prometheus:
-      serviceMonitor:
-        enabled: true
-  ui:
-    enabled: true
-    rollOutPods: true
-    ingress:
-      enabled: true
-      className: internal
-      hosts:
-        - &host hubble.hsn.dev
-      tls:
-        - hosts:
-            - *host
 ipam:
   mode: kubernetes
-ipv4NativeRoutingCIDR: 10.32.0.0/16
 k8sServiceHost: localhost
 k8sServicePort: 7445
 kubeProxyReplacement: true
-kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
-l2announcements:
-  enabled: true
-  leaseDuration: 120s
-  leaseRenewDeadline: 60s
-  leaseRetryPeriod: 1s
-loadBalancer:
-  algorithm: maglev
-  mode: dsr
-localRedirectPolicy: true
 operator:
   rollOutPods: true
   prometheus:
@@ -88,7 +28,6 @@ dashboards:
     grafana_folder: Cilium
 rollOutCiliumPods: true
 securityContext:
-  privileged: true
   capabilities:
     ciliumAgent:
       - CHOWN
@@ -106,4 +45,3 @@ securityContext:
       - NET_ADMIN
       - SYS_ADMIN
       - SYS_RESOURCE
-tunnel: disabled
