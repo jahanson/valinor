@@ -24,6 +24,9 @@ includes:
   rook:
     taskfile: ".taskfiles/rook"
     dir: .taskfiles/rook
+  flux:
+    dir: .taskfiles/flux
+    taskfile: .taskfiles/flux
 
 tasks:
 
