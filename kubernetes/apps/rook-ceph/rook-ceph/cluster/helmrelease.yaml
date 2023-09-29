@@ -53,15 +53,15 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "valinor-1"
+          - name: "aule"
             devices:
-              - name: /dev/disk/by-id/scsi-0HC_Volume_37231496
-          - name: "valinor-2"
+              - name: /dev/disk/by-id/scsi-0HC_Volume_37460833
+          - name: "eonwe"
             devices:
-              - name: /dev/disk/by-id/scsi-0HC_Volume_37231521
-          - name: "valinor-3"
+              - name: /dev/disk/by-id/scsi-0HC_Volume_37460887
+          - name: "arlen"
             devices:
-              - name: /dev/disk/by-id/scsi-0HC_Volume_37231596
+              - name: /dev/disk/by-id/scsi-0HC_Volume_37460897
 
     ingress:
       ingressClassName: "nginx"
