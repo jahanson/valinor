@@ -184,7 +184,7 @@ spec:
         root_url: https://grafana.valinor.social
 
     imageRenderer:
-      enabled: true
+      enabled: false
 
     ingress:
       enabled: true
