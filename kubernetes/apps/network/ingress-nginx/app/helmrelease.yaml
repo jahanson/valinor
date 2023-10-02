@@ -18,11 +18,11 @@ spec:
     controller:
       replicaCount: 3
 
-      hostPort:
-        enabled: true
-        ports:
-          http: 81
-          https: 444
+      # hostPort:
+      #   enabled: true
+      #   ports:
+      #     http: 81
+      #     https: 444
 
       updateStrategy:
         type: Recreate
@@ -31,8 +31,9 @@ spec:
         enabled: true
         type: LoadBalancer
         annotations:
-          external-dns.alpha.kubernetes.io/hostname: "ingress.valinor.social"
-          io.cilium/lb-ipam-ips: "10.2.42.1"
+          load-balancer.hetzner.cloud/location: fsn1
+          load-balancer.hetzner.cloud/use-private-ip: "true"
+
         externalTrafficPolicy: Local
 
       publishService:
