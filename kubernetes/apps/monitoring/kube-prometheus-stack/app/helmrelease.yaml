@@ -203,7 +203,7 @@ spec:
         thanos:
           image: quay.io/thanos/thanos:v0.32.3
           objectStorageConfig:
-            name: thanos-objstore-secret
+            name: thanos-s3-secret
             key: objstore.yml
         retention: 2d
         retentionSize: 15GB
@@ -222,8 +222,3 @@ spec:
               resources:
                 requests:
                   storage: 20Gi
-  valuesFrom:
-    - targetPath: objstoreConfig.config.bucket
-      kind: ConfigMap
-      name: thanos-bucket-v1
-      valuesKey: BUCKET_NAME
