@@ -33,4 +33,4 @@ spec:
           secretKeyRef:
             name: dnsimple-api-token
             key: letsencrypt-email
-    containerPort: 8443
+    containerport: 8443
