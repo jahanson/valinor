@@ -7,3 +7,4 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./metrics-server/ks.yaml
+  - ./hccm/ks.yaml
