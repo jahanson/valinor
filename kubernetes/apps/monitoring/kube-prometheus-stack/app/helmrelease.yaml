@@ -207,14 +207,6 @@ spec:
             key: objstore.yml
         retention: 2d
         retentionSize: 15GB
-        additionalScrapeConfigs:
-          - job_name: statsd-exporter
-            scrape_interval: 1m
-            scrape_timeout: 10s
-            honor_timestamps: true
-            static_configs:
-              - targets:
-                  - statsd-exporter.fediverse.svc.cluster.local:9102 # default zalando postgres cluster
         storageSpec:
           volumeClaimTemplate:
             spec:
