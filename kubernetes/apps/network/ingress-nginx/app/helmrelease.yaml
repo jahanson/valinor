@@ -25,7 +25,7 @@ spec:
       #     https: 444
 
       updateStrategy:
-        type: Recreate
+        type: RollingUpdate
 
       service:
         enabled: true
