@@ -62,6 +62,14 @@ spec:
           - name: "arlen"
             devices:
               - name: /dev/disk/by-id/scsi-0HC_Volume_37460897
+      resources:
+        mgr:
+          limits:
+            cpu: "1000m"
+            memory: "1Gi"
+          requests:
+            cpu: "1000m"
+            memory: "1Gi"
 
     ingress:
       ingressClassName: "nginx"
