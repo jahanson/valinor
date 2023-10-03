@@ -3,15 +3,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-cilium
+  name: cluster-apps-kubelet-csr-approver
   namespace: flux-system
 spec:
-  interval: 30m
-  retryInterval: 1m
-  timeout: 5m
-  path: "./kubernetes/apps/kube-system/cilium/app"
+  interval: 10m
+  path: "./kubernetes/apps/system/kubelet-csr-approver/app"
   prune: true
   sourceRef:
     kind: GitRepository
     name: valinor
-  wait: false
+  wait: true

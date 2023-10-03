@@ -1,0 +1,165 @@
+---
+clusterName: ${clusterName}
+
+talosVersion: v1.5.1
+kubernetesVersion: 1.28.1
+endpoint: "https://${clusterName}.hsn.dev:6443"
+
+cniConfig:
+  name: none
+
+additionalApiServerCertSans:
+  - ${clusterEndpointIP}
+
+additionalMachineCertSans:
+  - ${clusterEndpointIP}
+  - ${clusterName}.hsn.dev
+
+nodes:
+  - hostname: aule.hsn.dev
+    disableSearchDomain: true
+    ipAddress: 10.2.0.3
+    controlPlane: true
+    installDiskSelector:
+      busPath: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
+
+  - hostname: eonwe.hsn.dev
+    disableSearchDomain: true
+    ipAddress: 10.2.0.5
+    controlPlane: true
+    installDiskSelector:
+      busPath: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
+
+  - hostname: arlen.hsn.dev
+    disableSearchDomain: true
+    ipAddress: 10.2.0.4
+    controlPlane: true
+    installDiskSelector:
+      busPath: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
+  - hostname: vaire.hsn.dev
+    disableSearchDomain: true
+    ipAddress: 10.2.0.8
+    controlPlane: false
+    installDiskSelector:
+      busPath: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
+  - hostname: nienna.hsn.dev
+    disableSearchDomain: true
+    ipAddress: 10.2.0.9
+    controlPlane: false
+    installDiskSelector:
+      busPath: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
+  - hostname: orome.hsn.dev
+    disableSearchDomain: true
+    ipAddress: 10.2.0.10
+    controlPlane: false
+    installDiskSelector:
+      busPath: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
+
+controlPlane:
+  patches:
+    - |-
+      cluster:
+        allowSchedulingOnMasters: true
+        network:
+          cni:
+            name: none
+        proxy:
+          disabled: true
+        etcd:
+          advertisedSubnets:
+            - 10.2.0.0/24
+
+    - |-
+      - op: remove
+        path: /cluster/apiServer/admissionControl
+
+    - |-
+      machine:
+        features:
+          kubePrism:
+            enabled: true
+            port: 7445
+
+        files:
+          - op: create
+            path: /etc/cri/conf.d/20-customization.part
+            content: |
+              [plugins]
+                [plugins."io.containerd.grpc.v1.cri"]
+                  enable_unprivileged_ports = true
+                  enable_unprivileged_icmp = true
+        kubelet:
+          extraArgs:
+            feature-gates: CronJobTimeZone=true,GracefulNodeShutdown=true,NewVolumeManagerReconstruction=false
+            rotate-server-certificates: "true"
+          extraConfig:
+            maxPods: 150
+          nodeIP:
+            validSubnets:
+                - 10.2.0.0/24
+        network:
+          extraHostEntries:
+            - ip: ${clusterEndpointIP}
+              aliases:
+                - ${clusterName}.hsn.dev
+        sysctls:
+          fs.inotify.max_user_watches: "1048576"
+          fs.inotify.max_user_instances: "8192"
+        time:
+          disabled: false
+          servers:
+            - ntp.hetzner.com

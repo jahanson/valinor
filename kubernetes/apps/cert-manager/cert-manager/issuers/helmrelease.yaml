@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: cert-manager-webhook-dnsimple
-      version: 0.0.6
+      version: 0.0.10
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -33,3 +33,4 @@ spec:
           secretKeyRef:
             name: dnsimple-api-token
             key: letsencrypt-email
+    containerport: 8443
