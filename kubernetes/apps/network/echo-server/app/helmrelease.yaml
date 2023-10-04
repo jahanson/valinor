@@ -39,7 +39,7 @@ spec:
     ingress:
       main:
         enabled: true
-        classname: "nginx"
+        className: "nginx"
         annotations:
           external-dns.alpha.kubernetes.io/target: "ingress.valinor.social"
         hosts:
