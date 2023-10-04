@@ -62,6 +62,9 @@ spec:
           - name: "arlen"
             devices:
               - name: /dev/disk/by-id/scsi-0HC_Volume_37460897
+          - name: "orome"
+            devices:
+              - name: /dev/disk/by-id/scsi-0HC_Volume_37645333
       resources:
         mgr:
           limits:
