@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -20,11 +20,6 @@ spec:
     controller:
       annotations:
         reloader.stakater.com/auto: "true"
-
-    image:
-      repository: docker.io/1password/connect-api
-      tag: 1.7.2
-
     env:
       OP_BUS_PORT: "11220"
       OP_BUS_PEERS: "localhost:11221"
@@ -34,6 +29,43 @@ spec:
           secretKeyRef:
             name: onepassword-connect-secret
             key: onepassword-credentials.json
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: docker.io/1password/connect-api
+              tag: 1.7.2
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /heartbeat
+                    port: *port
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  failureThreshold: 3
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  initialDelaySeconds: 15
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /health
+                    port: *port
+                  failureThreshold: 30
+                  periodSeconds: 5
+                  successThreshold: 1
+                  timeoutSeconds: 1
 
     service:
       main:
@@ -43,58 +75,32 @@ spec:
 
     ingress:
       main:
-        enabled: true
-        ingressClassName: "nginx"
+        classname: "nginx"
         annotations:
           nginx.ingress.kubernetes.io/whitelist-source-range: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
         hosts:
           - host: &host "1pwconnect.valinor.social"
             paths:
               - path: /
+                service:
+                  name: main
+                  port: http
+
         tls:
           - hosts:
               - *host
 
-    probes:
-      liveness:
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /heartbeat
-            port: *port
-          initialDelaySeconds: 15
-          periodSeconds: 30
-          failureThreshold: 3
-      readiness:
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /health
-            port: *port
-          initialDelaySeconds: 15
-      startup:
-        enabled: true
-        custom: true
-        spec:
-          httpGet:
-            path: /health
-            port: *port
-          failureThreshold: 30
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 1
-
-    podSecurityContext:
-      runAsUser: 999
-      runAsGroup: 999
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 999
+        runAsGroup: 999
 
     persistence:
       shared:
         enabled: true
         type: emptyDir
-        mountPath: /home/opuser/.op/data
+        globalMounts:
+          - path: /home/opuser/.op/data
 
     resources:
       requests:
