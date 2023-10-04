@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.1
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -21,11 +21,14 @@ spec:
       type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
-
-    image:
-      repository: quay.io/prometheus/alertmanager
-      tag: main@sha256:7c060ae2a86177fbb4106fddcdd9f2cd494d4415b67ccda71a9fdf11f52e825b
-
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: quay.io/prometheus/alertmanager
+              tag: main@sha256:7c060ae2a86177fbb4106fddcdd9f2cd494d4415b67ccda71a9fdf11f52e825b
+              pullPolicy: IfNotPresent
     podAnnotations:
       reloader.stakater.com/auto: "true"
 
@@ -37,13 +40,15 @@ spec:
 
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        classname: nginx
         hosts:
           - host: &host alertmanager.valinor.social
             paths:
               - path: /
                 pathType: Prefix
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host
@@ -53,14 +58,14 @@ spec:
         enabled: true
         type: configMap
         name: alertmanager-configmap
-        mountPath: /etc/alertmanager
-        readOnly: true
+        globalMounts:
+          - path: /etc/alertmanager
       secrets:
         enabled: true
         type: secret
         name: alertmanager-secret
-        mountPath: /etc/secrets
-        readOnly: true
+        globalMounts:
+          - path: /etc/secrets
 
     resources:
       requests:
