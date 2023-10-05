@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -9,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 1.5.1
+      version: 2.0.2
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -17,14 +18,17 @@ spec:
         namespace: flux-system
 
   values:
-    image:
-      repository: ghcr.io/mendhak/http-https-echo
-      tag: "30@sha256:b6fccf52c73a5786b2e79e06e5c86d4689416d0ea41a6477af6ad89c1d81933f"
-
-    env:
-      HTTP_PORT: &port 8080
-      LOG_WITHOUT_NEWLINE: "true"
-      LOG_IGNORE_PATH: "/healthz"
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              repository: ghcr.io/mendhak/http-https-echo
+              tag: "30"
+            env:
+              HTTP_PORT: &port 8080
+              LOG_WITHOUT_NEWLINE: "true"
+              LOG_IGNORE_PATH: "/healthz"
 
     service:
       main:
@@ -35,13 +39,16 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: "nginx"
+        className: "nginx"
         annotations:
           external-dns.alpha.kubernetes.io/target: "ingress.valinor.social"
         hosts:
           - host: &host "echo-server.valinor.social"
             paths:
               - path: /
+                service:
+                  name: main
+                  port: http
         tls:
           - hosts:
               - *host

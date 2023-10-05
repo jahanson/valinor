@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.0.1
+      version: 2.0.2
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -18,25 +18,24 @@ spec:
         namespace: flux-system
 
   values:
-    controller:
-      annotations:
-        reloader.stakater.com/auto: "true"
-    env:
-      OP_BUS_PORT: "11220"
-      OP_BUS_PEERS: "localhost:11221"
-      OP_HTTP_PORT: &port 8080
-      OP_SESSION:
-        valueFrom:
-          secretKeyRef:
-            name: onepassword-connect-secret
-            key: onepassword-credentials.json
     controllers:
       main:
+        annotations:
+          reloader.stakater.com/auto: "true"
         containers:
           main:
             image:
               repository: docker.io/1password/connect-api
               tag: 1.7.2
+            env:
+              OP_BUS_PORT: "11220"
+              OP_BUS_PEERS: "localhost:11221"
+              OP_HTTP_PORT: &port-connect 8080
+              OP_SESSION:
+                valueFrom:
+                  secretKeyRef:
+                    name: onepassword-connect-secret
+                    key: onepassword-credentials.json
             probes:
               liveness:
                 enabled: true
@@ -44,7 +43,7 @@ spec:
                 spec:
                   httpGet:
                     path: /heartbeat
-                    port: *port
+                    port: *port-connect
                   initialDelaySeconds: 15
                   periodSeconds: 30
                   failureThreshold: 3
@@ -54,7 +53,7 @@ spec:
                 spec:
                   httpGet:
                     path: /health
-                    port: *port
+                    port: *port-connect
                   initialDelaySeconds: 15
               startup:
                 enabled: true
@@ -62,48 +61,49 @@ spec:
                 spec:
                   httpGet:
                     path: /health
-                    port: *port
+                    port: *port-connect
                   failureThreshold: 30
                   periodSeconds: 5
                   successThreshold: 1
                   timeoutSeconds: 1
-      sync:
-        name: sync
-        image: docker.io/1password/connect-sync:1.7.2@sha256:fe527ed9d81f193d8dfbba4140d61f9e8c8dceb0966b3009259087504e5ff79c
-        env:
-          - name: OP_SESSION
-            valueFrom:
-              secretKeyRef:
-                name: onepassword-connect-secret
-                key: onepassword-credentials.json
-          - name: OP_HTTP_PORT
-            value: &port 8081
-          - name: OP_BUS_PORT
-            value: "11221"
-          - name: OP_BUS_PEERS
-            value: "localhost:11220"
-        probes:
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: *port
-            initialDelaySeconds: 15
-          livenessProbe:
-            httpGet:
-              path: /heartbeat
-              port: *port
-            failureThreshold: 3
-            periodSeconds: 30
-            initialDelaySeconds: 15
-        volumeMounts:
-          - name: shared
-            mountPath: /home/opuser/.op/data
+          sync:
+            image:
+              repository: docker.io/1password/connect-sync
+              tag: 1.7.2
+            env:
+              - name: OP_SESSION
+                valueFrom:
+                  secretKeyRef:
+                    name: onepassword-connect-secret
+                    key: onepassword-credentials.json
+              - name: OP_HTTP_PORT
+                value: &port-sync 8081
+              - name: OP_BUS_PORT
+                value: "11221"
+              - name: OP_BUS_PEERS
+                value: "localhost:11220"
+            probes:
+              readinessProbe:
+                httpGet:
+                  path: /health
+                  port: *port-sync
+                initialDelaySeconds: 15
+              livenessProbe:
+                httpGet:
+                  path: /heartbeat
+                  port: *port-sync
+                failureThreshold: 3
+                periodSeconds: 30
+                initialDelaySeconds: 15
+            volumeMounts:
+              - name: shared
+                mountPath: /home/opuser/.op/data
 
     service:
       main:
         ports:
           http:
-            port: *port
+            port: *port-connect
 
     ingress:
       main:
