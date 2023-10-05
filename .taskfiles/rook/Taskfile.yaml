@@ -25,6 +25,19 @@ tasks:
     vars:
       node: aule
 
+  wipe-node-orome:
+    desc: Trigger a wipe of Rook-Ceph data on node "orome"
+    cmds:
+      - task: wipe-disk
+        vars:
+          node: "{{.node}}"
+          ceph_disk: "/dev/disk/by-id/scsi-0HC_Volume_37645333"
+      - task: wipe-data
+        vars:
+          node: "{{.node}}"
+    vars:
+      node: orome
+
   wipe-node-eonwe:
     desc: Trigger a wipe of Rook-Ceph data on node "eonwe"
     cmds:

@@ -8,6 +8,7 @@ resources:
  - cilium.yaml
  - cloudnative-pg.yaml
  - crowdsec.yaml
+ - crunchydata.yaml
  - dragonflydb.yaml
  - elastic.yaml
  - external-secrets.yaml
