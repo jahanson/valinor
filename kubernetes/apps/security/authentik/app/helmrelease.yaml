@@ -78,11 +78,11 @@ spec:
       enabled: true
       ingressClassName: nginx
       annotations:
-        external-dns.alpha.kubernetes.io/target: ingress.hsn.dev
+        external-dns.alpha.kubernetes.io/target: ingress.valinor.social
         nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
         nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
       hosts:
-        - host: &host authentik.hsn.dev
+        - host: &host authentik.valinor.social
           paths:
             - path: /
       tls:
