@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx
+  name: rook-ceph-dashboard
   annotations:
     tailscale.com/hostname: "rook"
   namespace: rook-ceph
