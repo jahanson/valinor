@@ -46,6 +46,8 @@ spec:
         disable: false
       dashboard:
         enabled: true
+        ssl: false
+        port: 8080
         urlPrefix: /
       storage:
         useAllNodes: false
