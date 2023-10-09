@@ -80,7 +80,7 @@ spec:
       ingressClassName: "tailscale"
       dashboard:
         annotations:
-          tailscale.com/hostname: "tailscale"
+          tailscale.com/hostname: "rook"
         tls:
           - hosts:
               - rook
