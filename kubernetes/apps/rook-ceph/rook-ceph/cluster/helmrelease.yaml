@@ -76,15 +76,6 @@ spec:
             cpu: "1000m"
             memory: "1Gi"
 
-    ingress:
-      ingressClassName: "tailscale"
-      dashboard:
-        annotations:
-          tailscale.com/hostname: "rook"
-        tls:
-          - hosts:
-              - rook
-
     cephBlockPoolsVolumeSnapshotClass:
       enabled: false
 
