@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: security
 resources:
   - ./externalsecret.yaml
+  - ./helmrelease.yaml
   - ./postgresCluster.yaml
 
 commonLabels:
