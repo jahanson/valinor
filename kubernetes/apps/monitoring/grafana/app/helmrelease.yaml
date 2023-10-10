@@ -62,7 +62,7 @@ spec:
         api_url: https://auth.valinor.social/application/o/userinfo/
         # map user groups to Grafana roles
         role_attribute_path: |
-          contains(groups[*], 'Grafana admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
+          contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
       date_formats:
         use_browser_locale: true
       explore:
