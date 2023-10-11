@@ -30,8 +30,6 @@ spec:
           load-balancer.hetzner.cloud/use-private-ip: true
           load-balancer.hetzner.cloud/uses-proxyprotocol: true
 
-        externalTrafficPolicy: Cluster
-
       publishService:
         enabled: true
 
