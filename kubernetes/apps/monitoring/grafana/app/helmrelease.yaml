@@ -56,7 +56,7 @@ spec:
         groups_attribute_path: groups
         name_attribute_path: name
         use_pkce: true
-        client_id: X9jnN2z3Ug0l0jgmua4uS6lHTF0HhtYhpdvJq3DC
+        client_id: CoV7ae1HxuNzwCbVPf3U7TfYMX2rVqC5T9RAUo5M
         client_secret: # Set by env vars
         auth_url: https://auth.valinor.social/application/o/authorize/
         token_url: https://auth.valinor.social/application/o/token/
