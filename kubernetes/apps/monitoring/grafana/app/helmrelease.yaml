@@ -32,7 +32,7 @@ spec:
     annotations:
     configmap.reloader.stakater.com/reload: grafana
     secret.reloader.stakater.com/reload: grafana-secrets
-    replicas: 2
+    replicas: 1
     envFromSecret: grafana-secrets
 
     grafana.ini:
