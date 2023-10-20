@@ -46,6 +46,8 @@ spec:
         signout_redirect_url: https://auth.hsn.dev/application/o/grafana/end-session/
       auth.basic:
         enabled: false
+      auth.anonymous:
+        enabled: false
       auth.generic_oauth:
         enabled: true
         name: Authentik
@@ -72,11 +74,6 @@ spec:
         news_feed_enabled: false
       panels:
         disable_sanitize_html: true
-      paths:
-        data: /var/lib/grafana/data
-        logs: /var/log/grafana
-        plugins: /var/lib/grafana/plugins
-        provisioning: /etc/grafana/provisioning
       security:
         allow_embedding: true
         cookie_samesite: grafana
