@@ -3,7 +3,9 @@
   "platform": "gitea",
   "endpoint": "https://git.hsn.dev",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "local>jahanson/valinor//.renovate/customDatasources.json5",
+    "local>jahanson/valinor//.renovate/customManagers.json5"
   ],
   "repositories": [],
     "flux": {
