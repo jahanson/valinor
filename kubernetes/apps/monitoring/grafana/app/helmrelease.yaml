@@ -79,7 +79,6 @@ spec:
         cookie_samesite: grafana
       server:
         root_url: https://grafana.valinor.social
-    dashboardProviders:
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -103,6 +102,7 @@ spec:
             url: http://alertmanager-operated.monitoring.svc.cluster.local:9093
             jsonData:
               implementation: prometheus
+    dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
         providers:
