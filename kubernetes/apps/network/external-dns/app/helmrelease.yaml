@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: externaldns
+  name: &name external-dns
   namespace: network
 spec:
   interval: 30m
@@ -17,7 +17,7 @@ spec:
       interval: 30m
 
   values:
-    fullnameOverride: &name externaldns
+    fullnameOverride: *name
 
     domainFilters:
       - valinor.social
