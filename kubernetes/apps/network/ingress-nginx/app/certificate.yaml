@@ -13,3 +13,18 @@ spec:
   dnsNames:
     - "valinor.social"
     - "*.valinor.social"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "khazadtube-tv"
+  namespace: network
+spec:
+  secretName: "khazadtube-tv-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "khazadtube.tv"
+  dnsNames:
+    - "khazadtube.tv"
+    - "*.khazadtube.tv"
