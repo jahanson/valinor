@@ -31,6 +31,9 @@ spec:
           value: "crowdsecurity/nginx"
         - name: PARSERS
           value: "crowdsecurity/cri-logs"
+        # Too many false positives from just browsing a website.
+        - name: DISABLE_SCENARIOS
+          value: "crowdsecurity/http-probing crowdsecurity/http-crawl-non_statics crowdsecurity/http-generic-bf"
       resources:
         limits:
           memory: 512Mi
