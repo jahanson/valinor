@@ -99,6 +99,14 @@ spec:
             editable: true
             options:
               path: /var/lib/grafana/dashboards/ceph
+          - name: flux
+            orgId: 1
+            folder: Flux
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/flux
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -144,6 +152,16 @@ spec:
           # renovate: depName="Ceph - Pools"
           gnetId: 5342
           revision: 9
+          datasource: Prometheus
+      flux:
+        flux-cluster:
+          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
+          datasource: Prometheus
+        flux-control-plane:
+          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/control-plane.json
+          datasource: Prometheus
+        flux-logs:
+          url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/logs.json
           datasource: Prometheus
     ingress:
       enabled: true
