@@ -179,14 +179,7 @@ spec:
       enabled: false
     prometheus:
       ingress:
-        enabled: true
-        ingressClassName: nginx
-        pathType: Prefix
-        hosts:
-          - &host prometheus.valinor.social
-        tls:
-          - hosts:
-              - *host
+        enabled: false
       thanosService:
         enabled: true
       thanosServiceMonitor:
