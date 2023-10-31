@@ -3,7 +3,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: miscellaneous-rules
+  name: minio-rules
   namespace: monitoring
   labels:
     prometheus: k8s
