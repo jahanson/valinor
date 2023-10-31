@@ -1,0 +1,17 @@
+---
+# yaml-language-server: $schema=https://ks.hsn.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: minio-erebor
+  namespace: monitoring
+spec:
+  staticConfigs:
+    - targets: [erebor.hsn.dev]
+  metricsPath: /minio/v2/metrics/cluster
+  scheme: HTTPS
+  authorization:
+    type: Bearer
+    credentials:
+      name: "erebor-scrape-creds"
+      key: "token"
