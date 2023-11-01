@@ -3,8 +3,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: redis
-  namespace: database
+  name: redis-peertube
+  namespace: fediverse
 spec:
   interval: 30m
   timeout: 15m
@@ -32,10 +32,10 @@ spec:
       sentinel: false
     master:
       persistence:
-        enabled: false
+        enabled: true
     replica:
       persistence:
-        enabled: false
+        enabled: true
     sentinel:
       enabled: true
       masterSet: redis-master
