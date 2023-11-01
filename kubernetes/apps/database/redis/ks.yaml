@@ -3,15 +3,17 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-redis-operator
+  name: cluster-apps-redis
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/database/redis-operator/app
+  dependsOn:
+    - name: cluster-apps-external-secrets-stores
+  path: ./kubernetes/apps/database/redis/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: valinor
-  wait: true
+  wait: false
   interval: 30m
   retryInterval: 1m
-  timeout: 5m
+  timeout: 15m
