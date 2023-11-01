@@ -6,7 +6,7 @@ metadata:
   name: cluster-apps-redis-peertube
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/database/redis/peertube
+  path: ./kubernetes/apps/fediverse/redis/peertube
   prune: true
   sourceRef:
     kind: GitRepository
