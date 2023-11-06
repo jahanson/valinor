@@ -86,21 +86,21 @@ defaults:
 
 # From the project root directory
 storage:
-  tmp: '/app/data/tmp/' # Use to download data (imports etc), store uploaded files before and during processing...
-  tmp_persistent: '/app/data/tmp-persistent/' # As tmp but the directory is not cleaned up between PeerTube restarts
-  bin: '/app/data/bin/'
-  avatars: '/app/data/media/avatars/'
-  videos: '/app/data/media/videos/'
-  streaming_playlists: '/app/data/media/streaming-playlists/'
-  redundancy: '/app/data/nfs/redundancy/'
-  logs: '/app/data/logs/'
-  previews: '/app/data/media/previews/'
-  thumbnails: '/app/data/media/thumbnails/'
-  torrents: '/app/data/torrents/'
-  captions: '/app/data/captions/'
-  cache: '/app/data/cache/'
-  plugins: '/app/data/plugins/'
-  well_known: '/app/data/well-known/'
+  tmp: '/data/tmp/' # Use to download data (imports etc), store uploaded files before and during processing...
+  tmp_persistent: '/data/tmp-persistent/' # As tmp but the directory is not cleaned up between PeerTube restarts
+  bin: '/data/bin/'
+  avatars: '/data/media/avatars/'
+  videos: '/data/media/videos/'
+  streaming_playlists: '/data/media/streaming-playlists/'
+  redundancy: '/data/nfs/redundancy/'
+  logs: '/data/logs/'
+  previews: '/data/media/previews/'
+  thumbnails: '/data/media/thumbnails/'
+  torrents: '/data/torrents/'
+  captions: '/data/captions/'
+  cache: '/data/cache/'
+  plugins: '/data/plugins/'
+  well_known: '/data/well-known/'
   # Overridable client files in client/dist/assets/images:
   # - logo.svg
   # - favicon.png
@@ -111,7 +111,7 @@ storage:
   # Could contain for example assets/images/favicon.png
   # If the file exists, peertube will serve it
   # If not, peertube will fallback to the default file
-  client_overrides: '/app/media/client-overrides/'
+  client_overrides: '/data/media/client-overrides/'
 
 static_files:
   # Require and check user authentication when accessing private files (internal/private video files)
