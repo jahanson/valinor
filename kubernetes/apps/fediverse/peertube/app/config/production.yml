@@ -694,6 +694,7 @@ object_storage:
     proxify_private_files: true
   videos:
     prefix: ''
+    base_url: 'https://erebor.hsn.dev'
   streaming_playlists:
     prefix: ''
   web_videos:
