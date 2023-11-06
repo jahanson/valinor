@@ -86,21 +86,21 @@ defaults:
 
 # From the project root directory
 storage:
-  tmp: '/app/tmp/' # Use to download data (imports etc), store uploaded files before and during processing...
-  tmp_persistent: '/app/tmp-persistent/' # As tmp but the directory is not cleaned up between PeerTube restarts
-  bin: '/app/bin/'
-  avatars: '/app/media/avatars/'
-  videos: '/app/media/videos/'
-  streaming_playlists: '/app/media/streaming-playlists/'
-  redundancy: '/app/nfs/redundancy/'
-  logs: '/app/logs/'
-  previews: '/app/media/previews/'
-  thumbnails: '/app/media/thumbnails/'
-  torrents: '/app/torrents/'
-  captions: '/app/captions/'
-  cache: '/app/cache/'
-  plugins: '/app/plugins/'
-  well_known: '/app/well-known/'
+  tmp: '/app/data/tmp/' # Use to download data (imports etc), store uploaded files before and during processing...
+  tmp_persistent: '/app/data/tmp-persistent/' # As tmp but the directory is not cleaned up between PeerTube restarts
+  bin: '/app/data/bin/'
+  avatars: '/app/data/media/avatars/'
+  videos: '/app/data/media/videos/'
+  streaming_playlists: '/app/data/media/streaming-playlists/'
+  redundancy: '/app/data/nfs/redundancy/'
+  logs: '/app/data/logs/'
+  previews: '/app/data/media/previews/'
+  thumbnails: '/app/data/media/thumbnails/'
+  torrents: '/app/data/torrents/'
+  captions: '/app/data/captions/'
+  cache: '/app/data/cache/'
+  plugins: '/app/data/plugins/'
+  well_known: '/app/data/well-known/'
   # Overridable client files in client/dist/assets/images:
   # - logo.svg
   # - favicon.png
