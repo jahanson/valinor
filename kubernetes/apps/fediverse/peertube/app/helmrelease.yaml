@@ -1,0 +1,89 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: peertube-server
+  namespace: fediverse
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 2.0.3
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  values:
+    controllers:
+      main:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          main:
+            image:
+              repository: ghcr.io/jahanson/peertube-server
+              tag: v5.2.1
+              pullPolicy: Always
+            env:
+              PEERTUBE_DB_HOSTNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: peertube-pguser-peertube
+                    key: host
+              PEERTUBE_DB_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: peertube-pguser-peertube
+                    key: user
+              PEERTUBE_DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: peertube-pguser-peertube
+                    key: password
+            envFrom:
+              - secretRef:
+                  name: peertube-secret
+            # probes:
+            #   readinessProbe:
+            #     httpGet:
+            #       path: /api/v1/instance
+            #       port: 9000
+            #     initialDelaySeconds: 15
+            #   livenessProbe:
+            #     httpGet:
+            #       path: /api/v1/instance
+            #       port: 9000
+            #     failureThreshold: 3
+            #     periodSeconds: 30
+            #     initialDelaySeconds: 15
+    service:
+      main:
+        ports:
+          http:
+            port: &port-api 9000
+
+    persistence:
+      config:
+        enabled: true
+        type: configMap
+        name: peertube-configmap
+        globalMounts:
+          - path: /app/config
+      # media:
+      #   existingClaim: nas-storage
+      #   advancedMounts:
+      #     main:
+      #       main:
+      #         - path: /app/storage
+
+    resources:
+      requests:
+        cpu: 4000m
+        memory: 500Mi
+      limits:
+        cpu: 4000m
+        memory: 500Mi
