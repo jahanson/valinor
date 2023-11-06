@@ -43,7 +43,7 @@ database:
 # set 'hostname' and 'port' to null
 redis:
   sentinel:
-    enabled: true
+    enabled: false
     enable_tls: false
     master_name: 'redis-master'
     sentinels:
