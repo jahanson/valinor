@@ -72,13 +72,13 @@ spec:
         type: configMap
         name: peertube-configmap
         globalMounts:
-          - path: /app/config
+          - path: /config
       # media:
       #   existingClaim: nas-storage
       #   advancedMounts:
       #     main:
       #       main:
-      #         - path: /app/storage
+      #         - path: /data
 
     resources:
       requests:

@@ -12,6 +12,9 @@ spec:
       synchronous_mode: true
       postgresql:
         synchronous_commit: "on"
+        pg_hba:
+          - host peertube peertube 10.244.0.0/16 md5
+
   instances:
     - name: postgres
       replicas: 2
