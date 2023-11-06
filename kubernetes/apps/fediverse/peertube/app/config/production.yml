@@ -697,5 +697,7 @@ object_storage:
     base_url: 'https://erebor.hsn.dev'
   streaming_playlists:
     prefix: ''
+    base_url: 'https://erebor.hsn.dev'
   web_videos:
     prefix: ''
+    base_url: 'https://erebor.hsn.dev'
