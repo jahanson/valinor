@@ -692,3 +692,7 @@ object_storage:
     # If you disable PeerTube proxy, ensure you use your own proxy that is able to access the private files
     # Or you can also set a public ACL for private files in object storage if you don't want to use a proxy
     proxify_private_files: true
+  streaming_playlists:
+    prefix: ''
+  web_videos:
+    prefix: ''
