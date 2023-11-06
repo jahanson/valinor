@@ -5,7 +5,15 @@ kind: Kustomization
 namespace: fediverse
 resources:
   - ./externalsecret.yaml
-  # - ./helmrelease.yaml
+   - ./helmrelease.yaml
   # - ./ingress.yaml
   - ./postgresCluster.yaml
   - ./pvc.yaml
+configMapGenerator:
+  - name: peertube-configmap
+    files:
+      - config/production.yml
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
