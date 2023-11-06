@@ -720,3 +720,36 @@ open_telemetry:
     # Send traces to a Jaeger compatible endpoint
     jaeger_exporter:
       endpoint: ''
+# Not sure why but this is required.
+services:
+  # Cards configuration to format video in Twitter
+  twitter:
+    username: '@Chocobozzz' # Indicates the Twitter account for the website or platform on which the content was published
+    # If true, a video player will be embedded in the Twitter feed on PeerTube video share
+    # If false, we use an image link card that will redirect on your PeerTube instance
+    # Change it to `true`, and then test on https://cards-dev.twitter.com/validator to see if you are whitelisted
+    whitelisted: false
+search:
+  # Add ability to fetch remote videos/actors by their URI, that may not be federated with your instance
+  # If enabled, the associated group will be able to "escape" from the instance follows
+  # That means they will be able to follow channels, watch videos, list videos of non followed instances
+  remote_uri:
+    users: true
+    anonymous: false
+
+  # Use a third party index instead of your local index, only for search results
+  # Useful to discover content outside of your instance
+  # If you enable search_index, you must enable remote_uri search for users
+  # If you do not enable remote_uri search for anonymous user, your instance will redirect the user on the origin instance
+  # instead of loading the video locally
+  search_index:
+    enabled: false
+    # URL of the search index, that should use the same search API and routes
+    # than PeerTube: https://docs.joinpeertube.org/api-rest-reference.html
+    # You should deploy your own with https://framagit.org/framasoft/peertube/search-index,
+    # and can use https://search.joinpeertube.org/ for tests, but keep in mind the latter is an unmoderated search index
+    url: ''
+    # You can disable local search in the client, so users only use the search index
+    disable_local_search: false
+    # If you did not disable local search in the client, you can decide to use the search index by default
+    is_default_search: false
