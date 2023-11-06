@@ -701,3 +701,6 @@ object_storage:
   web_videos:
     prefix: ''
     base_url: 'https://erebor.hsn.dev'
+open_telemetry:
+  metrics:
+    enabled: false
