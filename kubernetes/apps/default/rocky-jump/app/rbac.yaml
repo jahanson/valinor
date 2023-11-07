@@ -3,7 +3,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: tailscale
-  namespace: networking
+  namespace: default
 rules:
   - apiGroups:
       - ""
@@ -26,11 +26,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: tailscale
-  namespace: networking
+  namespace: default
 subjects:
   - kind: ServiceAccount
     name: tailscale
-    namespace: networking
+    namespace: default
 roleRef:
   kind: Role
   name: tailscale
@@ -40,4 +40,4 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: tailscale
-  namespace: networking
+  namespace: default
