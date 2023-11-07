@@ -33,6 +33,11 @@ spec:
         containers:
           main:
             image:
+              repository: rockylinux
+              tag: 9
+            command: ["/bin/bash", "-c", "while true; do sleep 10; done"]
+          tailscale:
+            image:
               repository: ghcr.io/tailscale/tailscale
               tag: v1.52.0
             env:
@@ -40,7 +45,7 @@ spec:
               SA_NAME: valinor-jump
               TS_USERSPACE: true
               TS_KUBE_SECRET: tailscale-state
-              TS_EXTRA_ARGS: --advertise-exit-node
+              TS_EXTRA_ARGS: --advertise-exit-node --ssh
               TS_TAILSCALED_EXTRA_ARGS: --debug=0.0.0.0:2000
             envFrom:
               - secretRef:
