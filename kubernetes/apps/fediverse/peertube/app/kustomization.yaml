@@ -7,7 +7,6 @@ resources:
   - ./externalsecret.yaml
   - ./helmrelease.yaml
   # - ./ingress.yaml
-  - ./postgresCluster.yaml
   - ./pvc.yaml
 configMapGenerator:
   - name: peertube-configmap
