@@ -15,6 +15,10 @@ spec:
         pg_hba:
           - host peertube peertube 10.244.0.0/16 md5
           - host all peertube 127.0.0.1 md5
+  monitoring:
+    pgmonitor:
+      exporter:
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.4.3-0
 
   instances:
     - name: postgres
