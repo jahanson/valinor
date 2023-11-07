@@ -28,22 +28,6 @@ spec:
               repository: ghcr.io/jahanson/peertube-server
               tag: v5.2.1
               pullPolicy: Always
-            env:
-              PEERTUBE_DB_HOSTNAME:
-                valueFrom:
-                  secretKeyRef:
-                    name: peertube-pguser-peertube
-                    key: host
-              PEERTUBE_DB_USERNAME:
-                valueFrom:
-                  secretKeyRef:
-                    name: peertube-pguser-peertube
-                    key: user
-              PEERTUBE_DB_PASSWORD:
-                valueFrom:
-                  secretKeyRef:
-                    name: peertube-pguser-peertube
-                    key: password
             envFrom:
               - secretRef:
                   name: peertube-secret
