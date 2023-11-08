@@ -35,6 +35,7 @@ trust_proxy:
 
 # Your database name will be database.name OR 'peertube'+database.suffix
 database:
+  ssl: true
   pool:
     max: 5
 
