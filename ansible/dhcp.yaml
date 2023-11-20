@@ -11,21 +11,21 @@
         state: present
     - name: Copy dhcpd.conf to /etc/dhcp/dhcpd.conf
       ansible.builtin.copy:
-        src: ../config/dhcpd-hostnet.conf
+        src: config/dhcpd-hostnet.conf
         dest: /etc/dhcp/dhcpd.conf
         owner: root
         group: root
         mode: '0644'
     - name: Copy isc-dhcp-server to /etc/default/isc-dhcp-server
       ansible.builtin.copy:
-        src: ../config/dhcpd-interfaces.conf
+        src: config/dhcpd-interfaces.conf
         dest: /etc/default/isc-dhcp-server
         owner: root
         group: root
         mode: '0644'
     - name: Copy net create script in ../scripts to /tmp
       ansible.builtin.copy:
-        src: ../scripts/create_net_if.sh
+        src: scripts/create_net_if.sh
         dest: /tmp/create_net_if.sh
         owner: root
         group: root
