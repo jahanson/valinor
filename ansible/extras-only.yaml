@@ -1,0 +1,112 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Check if reboot is required
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: reboot_required
+    - name: Reboot if required
+      ansible.builtin.reboot:
+      when: reboot_required.stat.exists
+    - name: Installing Crowdsec pre-reqs
+      ansible.builtin.apt:
+        pkg:
+          - gnupg
+        state: present
+    - name: Add crowdsec keyring
+      ansible.builtin.get_url:
+        url: https://packagecloud.io/crowdsec/crowdsec/gpgkey
+        dest: /etc/apt/trusted.gpg.d/crowdsec
+        checksum: sha512:5036042aff9d2700a39f64c3a6a70164a76162973e10dacb119aec98e9d60bd4a2f6d6ca4bc2c243a0751fd957baa51e0182fa0cd2f5798d7ec8a7893a1e219f
+        mode: '0644'
+    - name: Dearmor crowdsec gpg key
+      ansible.builtin.command:
+        cmd: gpg --dearmor /etc/apt/trusted.gpg.d/crowdsec
+        creates: /etc/apt/trusted.gpg.d/crowdsec.gpg
+    - name: Ensure keyring is removed
+      ansible.builtin.file:
+        path: /etc/apt/trusted.gpg.d/crowdsec
+        state: absent
+    - name: Add crowdsec repo
+      ansible.builtin.apt_repository:
+        repo: deb https://packagecloud.io/crowdsec/crowdsec/debian/ bookworm main
+        state: present
+        filename: crowdsec-install-repo
+        update_cache: true
+    - name: Add crowdsec source repo
+      ansible.builtin.apt_repository:
+        repo: deb-src https://packagecloud.io/crowdsec/crowdsec/debian/ bookworm main
+        state: present
+        filename: crowdsec-src-repo
+        update_cache: true
+    - name: Install firewalld and crowdsec packages
+      ansible.builtin.apt:
+        pkg:
+          - firewalld
+          - crowdsec
+          - crowdsec-firewall-bouncer-iptables
+        update_cache: true
+    - name: Add enp5s0 interface to public firewalld zone
+      ansible.posix.firewalld:
+        state: "enabled"
+        interface: "enp5s0"
+        zone: public
+        immediate: true
+        permanent: true
+    - name: Configure open ports with firewalld
+      ansible.posix.firewalld:
+        state: "{{ item.state }}"
+        port: "{{ item.port }}"
+        zone: public
+        immediate: true
+        permanent: true
+      with_items:
+        - { state: 'enabled', port: '22/tcp' }
+        - { state: 'enabled', port: '8006/tcp' }
+    - name: Enable firewalld masquerade
+      ansible.posix.firewalld:
+        state: "enabled"
+        masquerade: "true"
+        zone: public
+        immediate: true
+        permanent: true
+    - name: Enable masquerade rich rule for 192.168.20.0/24 network
+      ansible.posix.firewalld:
+        state: "enabled"
+        rich_rule: "rule family=ipv4 source address=192.168.20.0/24 masquerade"
+        permanent: true
+        immediate: true
+    - name: Enable ipv4 forwarding
+      ansible.posix.sysctl:
+        name: net.ipv4.ip_forward
+        value: 1
+        state: present
+        reload: true
+    - name: Enable ipv6 forwarding
+      ansible.posix.sysctl:
+        name: net.ipv6.conf.all.forwarding
+        value: 1
+        state: present
+        reload: true
+    - name: Add vfio modules to /etc/modules
+      ansible.builtin.lineinfile:
+        path: /etc/modules
+        line: "{{ item }}"
+        create: true
+      with_items:
+        - vfio
+        - vfio_iommu_type1
+        - vfio_pci
+        - vfio_virqfd
+    - name: Add intel_iommu=on iommu=pt to kernel start parameters
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT="consoleblank=0 systemd.show_status=true intel_iommu=on iommu=pt"'
+        state: present
+        backup: true
+    ## TODO: Find a way to only execute this ONLY when the kernel is installed.
+    - name: Update grub
+      ansible.builtin.command: update-grub

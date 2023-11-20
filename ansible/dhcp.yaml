@@ -1,0 +1,53 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    # VM DHCP Config
+    - name: Install isc-dhcp-server
+      ansible.builtin.apt:
+        pkg:
+          - isc-dhcp-server
+        state: present
+    - name: Copy dhcpd.conf to /etc/dhcp/dhcpd.conf
+      ansible.builtin.copy:
+        src: ../config/dhcpd-hostnet.conf
+        dest: /etc/dhcp/dhcpd.conf
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Copy isc-dhcp-server to /etc/default/isc-dhcp-server
+      ansible.builtin.copy:
+        src: ../config/dhcpd-interfaces.conf
+        dest: /etc/default/isc-dhcp-server
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Copy net create script in ../scripts to /tmp
+      ansible.builtin.copy:
+        src: ../scripts/create_net_if.sh
+        dest: /tmp/create_net_if.sh
+        owner: root
+        group: root
+        mode: '0755'
+    - name: Check if vmbr1 exists
+      ansible.builtin.stat:
+        path: /sys/class/net/vmbr1
+      register: vmbr1
+    - name: Set the network interfaces
+      ansible.builtin.shell: /tmp/valinor-scripts/create_net_if.sh > /etc/network/interfaces
+      when: not vmbr1.stat.exists
+    - name: Restart service networking
+      ansible.builtin.service:
+        name: networking
+        state: restarted
+    - name: Delete script /tmp/
+      ansible.builtin.file:
+        path: /tmp/create_net_if.sh
+        state: absent
+        force: true
+    - name: Enable isc-dhcp-server
+      ansible.builtin.service:
+        name: isc-dhcp-server
+        enabled: true
+        state: started

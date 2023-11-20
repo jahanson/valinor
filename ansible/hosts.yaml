@@ -1,0 +1,21 @@
+---
+valinor:
+  vars:
+    ansible_user: jahanson
+    github_username: jahanson
+    ansible_ssh_port: 22
+  children:
+    workers:
+      hosts:
+        varda:
+          ansible_host: varda.hsn.dev
+          ceph_drives:
+            - /dev/disk/by-id/nvme-SAMSUNG_MZVL2512HCJQ-00B00_S675NU0TB36131
+        # manwe:
+        #   ansible_host: manwe.hsn.dev
+        #   ceph_drives:
+        #     - /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S6S1NS0TC01391F
+        # nienna:
+        #   ansible_host: nienna.hsn.dev
+        #   ceph_drives:
+        #     - /dev/disk/by-id/nvme-SAMSUNG_MZVLB512HBJQ-00000_S4GENX0N424497
