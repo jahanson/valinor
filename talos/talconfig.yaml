@@ -75,6 +75,10 @@ nodes:
     talosImageURL: factory.talos.dev/installer/96f8c146a67c80daad900d3fc1a6976fe11062321eee9ab6ae2a6aea88b2d26e
     installDiskSelector:
       busPath: /pci0000:00/0000:00:03.1/0000:27:00.0/nvme/nvme0/nvme0n1
+    machineDisks:
+      - device: /dev/disk/by-id/nvme-SAMSUNG_MZVLB512HBJQ-00000_S4GENX0N424497
+        partitions:
+          - mountpoint: /var/mnt/lpnvme
     networkInterfaces:
       - interface: enp35s0
         dhcp: true
@@ -88,6 +92,18 @@ nodes:
               - network: 10.2.0.0/16
                 gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
                 metric: 2048
+    patches:
+      - |-
+        machine:
+          kubelet:
+            extraMounts:
+              - destination: /var/mnt/lpnvme
+                type: bind
+                source: /var/mnt/lpnvme
+                options:
+                  - rbind
+                  - rshared
+                  - rw
   # VM on Bare-metal EX44 Proxmox pve - 13th Gen Intel(R) Core(TM) i5-13500 - 64GB RAM
   # - hostname: orome.hsn.dev
   #   disableSearchDomain: true
