@@ -7,5 +7,6 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./democratic-csi/ks.yaml
+  - ./snapshot-controller/ks.yaml
   - ./reloader/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
