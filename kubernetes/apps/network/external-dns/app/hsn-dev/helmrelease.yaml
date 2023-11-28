@@ -18,7 +18,7 @@ spec:
       interval: 30m
 
   values:
-    fullnameOverride: &name externaldns-external
+    fullnameOverride: &name externaldns-hsn-dev
 
     domainFilters:
       - hsn.dev
