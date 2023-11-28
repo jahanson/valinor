@@ -22,3 +22,5 @@ spec:
     networking:
       enabled: true
       clusterCIDR: 10.244.0.0/16
+    robot:
+      enabled: true
