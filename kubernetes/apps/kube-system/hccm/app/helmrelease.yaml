@@ -17,6 +17,19 @@ spec:
         namespace: flux-system
       interval: 30m
   values:
+    env:
+      ROBOT_USER:
+        valueFrom:
+          secretKeyRef:
+            name: hcloud
+            key: robot-user
+            optional: true
+      ROBOT_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: hcloud
+            key: robot-password
+            optional: true
     metrics:
       enabled: true
     networking:
