@@ -8,7 +8,7 @@ metadata:
 spec:
   secretName: "khazadtube-tv-tls"
   issuerRef:
-    name: letsencrypt-production
+    name: letsencrypt-dnsimple-production
     kind: ClusterIssuer
   commonName: "khazadtube.tv"
   dnsNames:

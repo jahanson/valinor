@@ -8,7 +8,7 @@ metadata:
 spec:
   secretName: "valinor-social-tls"
   issuerRef:
-    name: letsencrypt-production
+    name: letsencrypt-dnsimple-production
     kind: ClusterIssuer
   commonName: "valinor.social"
   dnsNames:
