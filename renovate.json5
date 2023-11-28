@@ -6,9 +6,6 @@
     "config:recommended",
     "local>jahanson/valinor//.renovate/customManagers.json5"
   ],
-  "registryAliases": {
-    "ghcr.io": "hub.hsn.dev/ghcr.io"
-  },
   "repositories": [],
   "flux": {
     "fileMatch": [
@@ -78,6 +75,9 @@
   ],
   "packageRules": [
     {
+      "registryAliases": {
+        "ghcr.io": "hub.hsn.dev/ghcr.io"
+      },
       "description": "Use custom versioning for Vector",
       "matchDatasources": [
         "docker"
