@@ -4,8 +4,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: cert-manager
 resources:
-  - ./externalsecret.yaml
-  - ./issuer-letsencrypt-prod.yaml
-  - ./issuer-letsencrypt-staging.yaml
-  - ./dnsimple-issuer-rbac.yaml
-  - ./helmrelease.yaml
+  - ./dnsimple/externalsecret.yaml
+  - ./dnsimple/issuer-letsencrypt-prod.yaml
+  - ./dnsimple/issuer-letsencrypt-staging.yaml
+  - ./dnsimple/dnsimple-issuer-rbac.yaml
+  - ./dnsimple/helmrelease.yaml
+  - ./cloudflare/externalsecret.yaml
+  - ./cloudflare/issuer-letsencrypt-prod.yaml
+  - ./cloudflare/issuer-letsencrypt-staging.yaml
