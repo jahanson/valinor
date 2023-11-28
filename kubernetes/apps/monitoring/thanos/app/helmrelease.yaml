@@ -27,9 +27,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  dependsOn:
-    - name: rook-ceph-cluster
-      namespace: rook-ceph
   values:
     image:
       registry: quay.io
@@ -67,14 +64,14 @@ spec:
       retentionResolution1h: 14d
       persistence:
         enabled: true
-        storageClass: ceph-block
+        storageClass: local-hostpath
         size: 20Gi
     storegateway:
       enabled: true
       replicaCount: 3
       persistence:
         enabled: true
-        storageClass: ceph-block
+        storageClass: local-hostpath
         size: 10Gi
     ruler:
       enabled: true
@@ -95,7 +92,7 @@ spec:
                   severity: critical
       persistence:
         enabled: true
-        storageClass: ceph-block
+        storageClass: local-hostpath
         size: 5Gi
     metrics:
       enabled: true
