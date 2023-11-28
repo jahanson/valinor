@@ -10,6 +10,7 @@ resources:
  - cloudnative-pg.yaml
  - crowdsec.yaml
  - crunchydata.yaml
+ - democratic-csi.yaml
  - dragonflydb.yaml
  - elastic.yaml
  - external-secrets.yaml
