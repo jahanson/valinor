@@ -44,6 +44,7 @@ spec:
             any: true
 
       ingressClassResource:
+        name: hsn-nginx
         default: true
 
       config:
@@ -69,7 +70,7 @@ spec:
           resolver local=on ipv6=off;
 
       extraArgs:
-        default-ssl-certificate: "network/valinor-social-tls"
+        default-ssl-certificate: "network/hsn-dev-tls"
 
       topologySpreadConstraints:
         - maxSkew: 2

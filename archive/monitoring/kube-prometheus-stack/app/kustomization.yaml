@@ -2,8 +2,9 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: network
+namespace: monitoring
 resources:
-  - ./hsn-dev/helmrelease.yaml
-  - ./hsn-dev/externalsecret.yaml
-  - ./dns_endpoint-crd.yaml
+  - ./externalsecret.yaml
+  - ./helmrelease.yaml
+  - ./scrapeconfigs
+  - ./prometheusrules

@@ -78,7 +78,7 @@ spec:
         allow_embedding: true
         cookie_samesite: grafana
       server:
-        root_url: https://grafana.valinor.social
+        root_url: https://gv.hsn.dev
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -161,28 +161,28 @@ spec:
           gnetId: 15038
           revision: 1
           datasource: Prometheus
-        minio:
-          # renovate: depName="MinIO Dashboard"
-          gnetId: 13502
-          revision: 24
-          datasource:
-            - { name: DS_PROMETHEUS, value: Prometheus }
-      ceph:
-        ceph-cluster:
-          # renovate: depName="Ceph Cluster"
-          gnetId: 2842
-          revision: 17
-          datasource: Prometheus
-        ceph-osd:
-          # renovate: depName="Ceph - OSD (Single)"
-          gnetId: 5336
-          revision: 9
-          datasource: Prometheus
-        ceph-pools:
-          # renovate: depName="Ceph - Pools"
-          gnetId: 5342
-          revision: 9
-          datasource: Prometheus
+      #   minio:
+      #     # renovate: depName="MinIO Dashboard"
+      #     gnetId: 13502
+      #     revision: 24
+      #     datasource:
+      #       - { name: DS_PROMETHEUS, value: Prometheus }
+      # ceph:
+      #   ceph-cluster:
+      #     # renovate: depName="Ceph Cluster"
+      #     gnetId: 2842
+      #     revision: 17
+      #     datasource: Prometheus
+      #   ceph-osd:
+      #     # renovate: depName="Ceph - OSD (Single)"
+      #     gnetId: 5336
+      #     revision: 9
+      #     datasource: Prometheus
+      #   ceph-pools:
+      #     # renovate: depName="Ceph - Pools"
+      #     gnetId: 5342
+      #     revision: 9
+      #     datasource: Prometheus
       flux:
         flux-cluster:
           url: https://raw.githubusercontent.com/fluxcd/flux2/main/manifests/monitoring/monitoring-config/dashboards/cluster.json
@@ -267,10 +267,10 @@ spec:
     ingress:
       enabled: true
       annotations:
-        external-dns.alpha.kubernetes.io/target: ingress.valinor.social
+        external-dns.alpha.kubernetes.io/target: valinor.hsn.dev
       ingressClassName: nginx
       hosts:
-        - &host grafana.valinor.social
+        - &host grafana.hsn.dev
       tls:
         - hosts:
             - *host
