@@ -69,6 +69,8 @@ nodes:
     ipAddress: 10.2.1.2
     controlPlane: false
     # customization:
+    # extraKernelArgs:
+    #   - net.ifnames=0
     # systemExtensions:
     #     officialExtensions:
     #         - siderolabs/amd-ucode
@@ -104,52 +106,6 @@ nodes:
                   - rbind
                   - rshared
                   - rw
-  # VM on Bare-metal EX44 Proxmox pve - 13th Gen Intel(R) Core(TM) i5-13500 - 64GB RAM
-  # - hostname: orome.hsn.dev
-  #   disableSearchDomain: true
-  #   ipAddress: 10.2.1.3
-  #   controlPlane: false
-  #   # customization:
-  #   # extraKernelArgs:
-  #   #     - net.ifnames=0
-  #   # systemExtensions:
-  #   #     officialExtensions:
-  #   #         - siderolabs/i915-ucode
-  #   #         - siderolabs/intel-ucode
-  #   #         - siderolabs/qemu-guest-agent
-  #   installDisk: /dev/vda
-  #   # talosImageURL: factory.talos.dev/installer/50da29e436eac5b66bb9727beff6469822d4d1387543cc033a976afb063d9c84
-  #   talosImageURL: hub.hsn.dev/factory.talos.dev/installer/aada47690a5864b64a0947bd228f7426d0bddab59a3ffca542602b717a896e34
-  #   networkInterfaces:
-  #     - interface: eth0
-  #       dhcp: false
-  #       addresses:
-  #         - 10.2.1.3/24
-  #       routes:
-  #         - network: 10.2.0.0/16
-  #           gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
-  #           metric: 2048
-  #     - interface: eth1
-  #       dhcp: true
-  #       routes:
-  #         - network: 0.0.0.0/0 # The route's network (destination).
-  #           gateway: 192.168.20.1 # The route's gateway (if empty, creates link scope route).
-  #           metric: 1024
-  # - hostname: vaire.hsn.dev
-  #   disableSearchDomain: true
-  #   ipAddress: 10.2.0.8
-  #   controlPlane: false
-  #   installDiskSelector:
-  #     busPath: /dev/sda
-  #   networkInterfaces:
-  #     - interface: eth0
-  #       dhcp: true
-  #     - interface: eth1
-  #       dhcp: true
-  #       routes:
-  #         - network: 10.2.0.0/16
-  #           gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
-  #           metric: 2048
 worker:
   patches:
     - |-
