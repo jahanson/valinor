@@ -17,6 +17,9 @@ spec:
         namespace: flux-system
       interval: 30m
   values:
+    image:
+      repository: ghcr.io/jahanson/hccm
+      tag: v1.19.1
     env:
       ROBOT_USER:
         valueFrom:
@@ -29,6 +32,12 @@ spec:
           secretKeyRef:
             name: hcloud
             key: robot-password
+            optional: true
+      HCLOUD_TOKEN:
+        valueFrom:
+          secretKeyRef:
+            name: hcloud
+            key: token
             optional: true
     metrics:
       enabled: true
