@@ -36,12 +36,6 @@ spec:
             name: hcloud
             key: token
             optional: true
-      HCLOUD_NETWORK:
-        valueFrom:
-          secretKeyRef:
-            name: hcloud
-            key: network
-            optional: true
     metrics:
       enabled: true
     networking:
