@@ -266,8 +266,6 @@ spec:
           datasource: Prometheus
     ingress:
       enabled: true
-      annotations:
-        external-dns.alpha.kubernetes.io/target: valinor.hsn.dev
       ingressClassName: hsn-nginx
       hosts:
         - &host grafana.hsn.dev
