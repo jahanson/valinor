@@ -10,16 +10,13 @@ spec:
   chart:
     spec:
       chart: hcloud-cloud-controller-manager
-      version: v1.18.0
+      version: 1.19.0-rc.0
       sourceRef:
         kind: HelmRepository
         name: hetzner
         namespace: flux-system
       interval: 30m
   values:
-    image:
-      repository: ghcr.io/jahanson/hccm
-      tag: v1.19.1
     env:
       ROBOT_USER:
         valueFrom:
