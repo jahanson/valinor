@@ -22,7 +22,7 @@ spec:
     agent:
       acquisition:
         - namespace: network
-          podName: ingress-nginx-controller-*
+          podName: ingress-nginx-hsn-controller-*
           program: nginx
 
       env:
