@@ -78,7 +78,7 @@ spec:
         allow_embedding: true
         cookie_samesite: grafana
       server:
-        root_url: https://gv.hsn.dev
+        root_url: https://grafana.hsn.dev
     datasources:
       datasources.yaml:
         apiVersion: 1
