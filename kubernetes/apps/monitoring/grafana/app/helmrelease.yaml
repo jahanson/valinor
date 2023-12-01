@@ -268,7 +268,7 @@ spec:
       enabled: true
       annotations:
         external-dns.alpha.kubernetes.io/target: valinor.hsn.dev
-      ingressClassName: nginx
+      ingressClassName: hsn-nginx
       hosts:
         - &host grafana.hsn.dev
       tls:

@@ -104,7 +104,7 @@ spec:
       ingress:
         enabled: true
         pathType: Prefix
-        ingressClassName: nginx
+        ingressClassName: hsn-nginx
         hosts:
           - &host alert-manager.valinor.social
         tls:
