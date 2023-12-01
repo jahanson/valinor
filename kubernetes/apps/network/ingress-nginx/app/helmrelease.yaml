@@ -63,10 +63,6 @@ spec:
         proxy-buffer-size: "16k"
         ssl-protocols: "TLSv1.3 TLSv1.2"
         use-forwarded-headers: "true"
-        plugins: "crowdsec"
-        lua-shared-dicts: "crowdsec_cache: 50m"
-        server-snippet: |
-          resolver local=on ipv6=off;
 
       extraArgs:
         default-ssl-certificate: "network/hsn-dev-tls"
@@ -77,7 +73,7 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app.kubernetes.io/instance: ingress-nginx
+              app.kubernetes.io/instance: ingress-nginx-hsn
               app.kubernetes.io/component: controller
       affinity:
         podAntiAffinity:
@@ -91,40 +87,13 @@ spec:
                   - key: app.kubernetes.io/instance
                     operator: In
                     values:
-                      - ingress-nginx
+                      - ingress-nginx-hsn
               topologyKey: kubernetes.io/hostname
 
       resources:
         requests:
           cpu: 23m
           memory: 381M
-      extraVolumes:
-        - name: crowdsec-bouncer-plugin
-          emptyDir: {}
-      extraInitContainers:
-        - name: init-clone-crowdsec-bouncer
-          image: crowdsecurity/lua-bouncer-plugin
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: API_URL
-              value: "http://crowdsec-service.security.svc.cluster.local:8080" # crowdsec lapi service-name
-            - name: API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: nginx-ingress-secrets
-                  key: nginx-ingress-bouncer-apikey
-            - name: BOUNCER_CONFIG
-              value: "/crowdsec/crowdsec-bouncer.conf"
-            - name: BAN_TEMPLATE_PATH
-              value: /etc/nginx/lua/plugins/crowdsec/templates/ban.html
-          command: ['sh', '-c', "sh /docker_start.sh; mkdir -p /lua_plugins/crowdsec/; cp -R /crowdsec/* /lua_plugins/crowdsec/"]
-          volumeMounts:
-            - name: crowdsec-bouncer-plugin
-              mountPath: /lua_plugins
-      extraVolumeMounts:
-        - name: crowdsec-bouncer-plugin
-          mountPath: /etc/nginx/lua/plugins/crowdsec
-          subPath: crowdsec
 
     defaultBackend:
       enabled: false
