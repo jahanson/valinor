@@ -38,7 +38,7 @@ spec:
       replicaCount: 3
       ingress:
         enabled: true
-        ingressClassName: hsn-
+        ingressClassName: hsn-nginx
         annotations:
           external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
         hostname: &host thanos-query-frontend.hsn.dev
