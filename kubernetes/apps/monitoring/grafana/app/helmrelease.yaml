@@ -266,6 +266,8 @@ spec:
           datasource: Prometheus
     ingress:
       enabled: true
+      annotations:
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
       ingressClassName: hsn-nginx
       hosts:
         - &host grafana.hsn.dev
