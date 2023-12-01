@@ -39,7 +39,7 @@ spec:
     ingress:
       main:
         enabled: true
-        className: "nginx"
+        className: hsn-nginx
         annotations:
           external-dns.alpha.kubernetes.io/target: "valinor.hsn.dev"
         hosts:

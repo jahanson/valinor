@@ -38,7 +38,7 @@ spec:
       replicaCount: 3
       ingress:
         enabled: true
-        ingressClassName: nginx
+        ingressClassName: hsn-nginx
         hostname: &host thanos-query-frontend.valinor.social
         tls: true
         extraTls:
