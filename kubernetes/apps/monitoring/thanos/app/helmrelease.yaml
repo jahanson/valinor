@@ -39,7 +39,7 @@ spec:
       ingress:
         enabled: true
         ingressClassName: hsn-nginx
-        hostname: &host thanos-query-frontend.valinor.social
+        hostname: &host thanos-query-frontend.hsn.dev
         tls: true
         extraTls:
           - hosts:

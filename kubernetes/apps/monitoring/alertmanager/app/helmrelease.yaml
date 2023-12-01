@@ -42,7 +42,7 @@ spec:
       main:
         classname: nginx
         hosts:
-          - host: &host alertmanager.valinor.social
+          - host: &host alertmanager.hsn.dev
             paths:
               - path: /
                 pathType: Prefix
