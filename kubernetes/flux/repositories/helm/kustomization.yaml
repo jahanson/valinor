@@ -18,8 +18,10 @@ resources:
  - grafana.yaml
  - hetzner.yaml
  - ingress-nginx.yaml
+ - intel.yaml
  - jahanson.yaml
  - jetstack.yaml
+ - kubernetes-sigs-nfd.yaml
 #  - kubernetes-sigs-descheduler.yaml
  - kyverno.yaml
  - kubernetes-sigs-metrics-server.yaml
