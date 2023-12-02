@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+  namespace: default
+spec:
+  nodeSelector:
+    intel.feature.node.kubernetes.io/gpu: "true"
+  containers:
+    - name: ubuntu
+      image: ubuntu:latest
+      securityContext:
+        privileged: true
+      command: ["/bin/bash", "-c", "while true; do sleep 10; done"]
+      resources:
+        requests:
+          cpu: 100m
+          gpu.intel.com/i915: 1
+          memory: 512Mi
+        limits:
+          cpu: 4000m
+          gpu.intel.com/i915: 1
+          memory: 8000Mi
