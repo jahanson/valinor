@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   dependsOn:
     - name: intel-device-plugins-gpu
-      namespace: kube-system
+      namespace: system
   values:
     controllers:
       main:
