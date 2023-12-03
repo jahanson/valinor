@@ -7,5 +7,6 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./cilium/ks.yaml
-  - ./metrics-server/ks.yaml
   - ./hccm/ks.yaml
+  - ./metrics-server/ks.yaml
+  - ./spegel/ks.yaml
