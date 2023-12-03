@@ -9,4 +9,3 @@ resources:
   - ./cilium/ks.yaml
   - ./hccm/ks.yaml
   - ./metrics-server/ks.yaml
-  - ./spegel/ks.yaml
