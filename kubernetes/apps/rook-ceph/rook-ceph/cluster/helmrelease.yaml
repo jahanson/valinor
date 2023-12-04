@@ -55,15 +55,9 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "aule"
+          - name: "nienna"
             devices:
               - name: /dev/disk/by-id/scsi-0HC_Volume_37460833
-          - name: "eonwe"
-            devices:
-              - name: /dev/disk/by-id/scsi-0HC_Volume_37460887
-          - name: "arlen"
-            devices:
-              - name: /dev/disk/by-id/scsi-0HC_Volume_37460897
           - name: "orome"
             devices:
               - name: /dev/disk/by-id/scsi-0HC_Volume_37645333
