@@ -69,19 +69,25 @@ nodes:
     ipAddress: 10.2.1.2
     controlPlane: false
     # customization:
-    # extraKernelArgs:
-    #   - net.ifnames=0
-    # systemExtensions:
+    #   extraKernelArgs:
+    #     - net.ifnames=0
+    #   systemExtensions:
     #     officialExtensions:
-    #         - siderolabs/amd-ucode
-    talosImageURL: factory.talos.dev/installer/6c789e7a3eec37617fd9d239a7f696ba48e75bc4780f5cb30bf8882686d79a22
+    #       - siderolabs/amd-ucode
+    #       - siderolabs/qemu-guest-agent
+    talosImageURL: factory.talos.dev/installer/696bb48d9c48e567596f393a4ff9bfd26d4dda5d92c16beb580e96fa68d6324c
+    # https://factory.talos.dev/image/696bb48d9c48e567596f393a4ff9bfd26d4dda5d92c16beb580e96fa68d6324c/v1.5.5/metal-amd64.iso
+    # no guest agent in the raw.xz image
     # https://factory.talos.dev/image/6c789e7a3eec37617fd9d239a7f696ba48e75bc4780f5cb30bf8882686d79a22/v1.5.5/metal-amd64.raw.xz
     installDiskSelector:
-      busPath: /pci0000:00/0000:00:03.1/0000:27:00.0/nvme/nvme0/nvme0n1
-      # Ceph Disk: /dev/disk/by-id/nvme-SAMSUNG_MZVLB512HBJQ-00000_S4GENX0N424497
+      busPath: /pci0000:00/0000:00:0a.0/virtio2/
+      # Ceph Disk Fast: /pci0000:00/0000:00:11.0/nvme/nvme0/nvme0n1
+      # Ceph Disk Large: /pci0000:00/0000:00:10.0/ata1/host0/target0:0:0/0:0:0:0/
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: false
         vlans:
           - vlanId: 4010
             mtu: 1400
@@ -106,18 +112,13 @@ nodes:
     #             - siderolabs/intel-ucode
     #             - siderolabs/qemu-guest-agent
     talosImageURL: factory.talos.dev/installer/f2f665587318c2d79e7b315cc333fff276ed59c8de831f16e28b4db107496ac2
+    # https://factory.talos.dev/image/f2f665587318c2d79e7b315cc333fff276ed59c8de831f16e28b4db107496ac2/metal-amd64.iso
     installDiskSelector:
       busPath: /pci0000:00/0000:00:0a.0/virtio2/
       # Ceph Disk: /dev/disk/by-id/nvme-SAMSUNG_MZVL2512HCJQ-00B00_S675NU0TB36132
     networkInterfaces:
       - interface: eth0
         dhcp: true
-        addresses:
-          - ${oromeIP}
-        routes:
-          - network: 0.0.0.0/0
-            gateway: ${oromeGateway} # The route's gateway (if empty, creates link scope route).
-            metric: 1024
       - interface: eth1
         dhcp: false
         vlans:
