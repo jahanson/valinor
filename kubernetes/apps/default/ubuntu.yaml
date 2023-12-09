@@ -4,8 +4,6 @@ metadata:
   name: ubuntu
   namespace: default
 spec:
-  nodeSelector:
-    intel.feature.node.kubernetes.io/gpu: "true"
   containers:
     - name: ubuntu
       image: ubuntu:latest
@@ -15,9 +13,7 @@ spec:
       resources:
         requests:
           cpu: 100m
-          gpu.intel.com/i915: 1
           memory: 512Mi
         limits:
           cpu: 4000m
-          gpu.intel.com/i915: 1
-          memory: 8000Mi
+          memory: 4000Mi
