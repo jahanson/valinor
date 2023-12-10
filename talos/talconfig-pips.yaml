@@ -3,52 +3,70 @@ clusterName: valinor
 
 talosVersion: v1.5.5
 kubernetesVersion: 1.28.4
-endpoint: "https://${clusterEndpointIP}:6443"
+endpoint: "https://10.2.0.3:6443"
 
 cniConfig:
   name: none
 
 additionalApiServerCertSans:
-  - ${clusterEndpointIP}
+  - 10.2.0.3
 
 additionalMachineCertSans:
-  - ${clusterEndpointIP}
+  - 10.2.0.3
 
 nodes:
   # cloud CAX21 Arm64
   - hostname: aule
     disableSearchDomain: true
-    ipAddress: ${auleIP}
+    ipAddress: 10.2.0.4
     controlPlane: true
     installDiskSelector:
       busPath: /dev/sda
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.0.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
   # cloud CAX21 Arm64
   - hostname: arlen
     disableSearchDomain: true
-    ipAddress: ${arlenIP}
+    ipAddress: 10.2.0.5
     controlPlane: true
     installDiskSelector:
       busPath: /dev/sda
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.0.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
   # cloud CAX21 Arm64
   - hostname: eonwe
     disableSearchDomain: true
-    ipAddress: ${eonweIP}
+    ipAddress: 10.2.0.6
     controlPlane: true
     installDiskSelector:
       busPath: /dev/sda
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.0.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
   # Bare-metal AX41-Nvme - AMD Ryzen 5 3600 6-Core Processor (Zen2) - 64GB ECC RAM
   - hostname: nienna
     disableSearchDomain: true
-    ipAddress: ${niennaIP}
+    ipAddress: 10.2.1.2
     controlPlane: false
     # customization:
     #   extraKernelArgs:
@@ -68,10 +86,22 @@ nodes:
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: false
+        vlans:
+          - vlanId: 4010
+            mtu: 1400
+            addresses:
+              - 10.2.1.2/24
+            dhcp: false
+            routes:
+              - network: 10.2.0.0/16
+                gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+                metric: 2048
   # VM on EX44 - Intel Gen 13 (Raptor Lake) - 64GB RAM
   - hostname: orome
     disableSearchDomain: true
-    ipAddress: ${oromeIP}
+    ipAddress: 10.2.1.3
     controlPlane: false
     # customization:
     #     extraKernelArgs:
@@ -89,6 +119,18 @@ nodes:
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: false
+        vlans:
+          - vlanId: 4010
+            mtu: 1400
+            addresses:
+              - 10.2.1.3/24
+            dhcp: false
+            routes:
+              - network: 10.2.0.0/16
+                gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+                metric: 2048
 worker:
   patches:
     - |-
@@ -111,6 +153,9 @@ worker:
             rotate-server-certificates: "true"
           extraConfig:
             maxPods: 150
+          nodeIP:
+            validSubnets:
+                - 10.2.0.0/16
 controlPlane:
   patches:
     - |-
@@ -125,6 +170,9 @@ controlPlane:
             name: none
         proxy:
           disabled: true
+        etcd:
+          advertisedSubnets:
+            - 10.2.0.0/24
 
     - |-
       - op: remove
@@ -151,6 +199,12 @@ controlPlane:
             rotate-server-certificates: "true"
           extraConfig:
             maxPods: 150
+          nodeIP:
+            validSubnets:
+                - 10.2.0.0/16
+        network:
+          extraHostEntries:
+            - ip: 10.2.0.3
         sysctls:
           fs.inotify.max_user_watches: "1048576"
           fs.inotify.max_user_instances: "8192"
