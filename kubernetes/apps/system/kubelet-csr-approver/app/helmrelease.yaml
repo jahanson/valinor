@@ -16,6 +16,17 @@ spec:
         name: postfinance
         namespace: flux-system
       interval: 30m
+
+  values:
+    tolerations:
+      # https://github.com/hetznercloud/hcloud-cloud-controller-manager
+      # Allow HCCM itself to schedule on nodes that have not yet been initialized by HCCM.
+      - key: "node.cloudprovider.kubernetes.io/uninitialized"
+        value: "true"
+        effect: "NoSchedule"
+      - key: "CriticalAddonsOnly"
+        operator: "Exists"
+
   valuesFrom:
     - kind: ConfigMap
       name: kubelet-csr-approver-values
