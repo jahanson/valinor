@@ -16,16 +16,6 @@ additionalMachineCertSans:
 
 nodes:
   # cloud CAX21 Arm64
-  - hostname: aule
-    disableSearchDomain: true
-    ipAddress: ${auleIP}
-    controlPlane: true
-    installDiskSelector:
-      busPath: /dev/sda
-    networkInterfaces:
-      - interface: eth0
-        dhcp: true
-  # cloud CAX21 Arm64
   - hostname: arlen
     disableSearchDomain: true
     ipAddress: ${arlenIP}
@@ -35,6 +25,12 @@ nodes:
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.0.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
   # cloud CAX21 Arm64
   - hostname: eonwe
     disableSearchDomain: true
@@ -45,6 +41,28 @@ nodes:
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.0.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
+  # cloud CAX21 Arm64
+  - hostname: aule
+    disableSearchDomain: true
+    ipAddress: ${auleIP}
+    controlPlane: true
+    installDiskSelector:
+      busPath: /dev/sda
+    networkInterfaces:
+      - interface: eth0
+        dhcp: true
+      - interface: eth1
+        dhcp: true
+        routes:
+          - network: 10.2.0.0/16
+            gateway: 10.2.0.1 # The route's gateway (if empty, creates link scope route).
+            metric: 2048
   # Bare-metal AX41-Nvme - AMD Ryzen 5 3600 6-Core Processor (Zen2) - 64GB ECC RAM
   - hostname: nienna
     disableSearchDomain: true
@@ -57,17 +75,27 @@ nodes:
     #     officialExtensions:
     #       - siderolabs/amd-ucode
     #       - siderolabs/qemu-guest-agent
-    talosImageURL: factory.talos.dev/installer/696bb48d9c48e567596f393a4ff9bfd26d4dda5d92c16beb580e96fa68d6324c
+    talosImageURL: harbor.hsn.dev/factory.talos.dev/installer/696bb48d9c48e567596f393a4ff9bfd26d4dda5d92c16beb580e96fa68d6324c
     # https://factory.talos.dev/image/696bb48d9c48e567596f393a4ff9bfd26d4dda5d92c16beb580e96fa68d6324c/v1.5.5/metal-amd64.iso
     # no guest agent in the raw.xz image
     # https://factory.talos.dev/image/6c789e7a3eec37617fd9d239a7f696ba48e75bc4780f5cb30bf8882686d79a22/v1.5.5/metal-amd64.raw.xz
     installDiskSelector:
       busPath: /pci0000:00/0000:00:0a.0/virtio2/
-      # Ceph Disk Fast: /pci0000:00/0000:00:11.0/nvme/nvme0/nvme0n1
-      # Ceph Disk Large: /pci0000:00/0000:00:10.0/ata1/host0/target0:0:0/0:0:0:0/
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: false
+        vlans:
+          - vlanId: 4010
+            mtu: 1400
+            addresses:
+              - 10.2.1.2/24
+            dhcp: false
+            routes:
+              - network: 10.2.0.0/16
+                gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+                metric: 2048
   # VM on EX44 - Intel Gen 13 (Raptor Lake) - 64GB RAM
   - hostname: orome
     disableSearchDomain: true
@@ -81,14 +109,25 @@ nodes:
     #             - siderolabs/i915-ucode
     #             - siderolabs/intel-ucode
     #             - siderolabs/qemu-guest-agent
-    talosImageURL: factory.talos.dev/installer/f2f665587318c2d79e7b315cc333fff276ed59c8de831f16e28b4db107496ac2
+    talosImageURL: harbor.hsn.dev/factory.talos.dev/installer/f2f665587318c2d79e7b315cc333fff276ed59c8de831f16e28b4db107496ac2
     # https://factory.talos.dev/image/f2f665587318c2d79e7b315cc333fff276ed59c8de831f16e28b4db107496ac2/metal-amd64.iso
     installDiskSelector:
       busPath: /pci0000:00/0000:00:0a.0/virtio2/
-      # Ceph Disk: /dev/disk/by-id/nvme-SAMSUNG_MZVL2512HCJQ-00B00_S675NU0TB36132
     networkInterfaces:
       - interface: eth0
         dhcp: true
+      - interface: eth1
+        dhcp: false
+        vlans:
+          - vlanId: 4010
+            mtu: 1400
+            addresses:
+              - 10.2.1.3/24
+            dhcp: false
+            routes:
+              - network: 10.2.0.0/16
+                gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
+                metric: 2048
 worker:
   patches:
     - |-
@@ -111,6 +150,19 @@ worker:
             rotate-server-certificates: "true"
           extraConfig:
             maxPods: 150
+          nodeIP:
+            validSubnets:
+                - 10.2.0.0/16
+        registries:
+          mirrors:
+            docker.io:
+              endpoints:
+                - http://harbor.hsn.dev/v2/docker.io
+              overridePath: true
+            ghcr.io:
+              endpoints:
+                - http://harbor.hsn.dev/v2/ghcr.io
+              overridePath: true
 controlPlane:
   patches:
     - |-
@@ -125,6 +177,9 @@ controlPlane:
             name: none
         proxy:
           disabled: true
+        etcd:
+          advertisedSubnets:
+            - 10.2.0.0/24
 
     - |-
       - op: remove
@@ -136,6 +191,16 @@ controlPlane:
           kubePrism:
             enabled: true
             port: 7445
+        registries:
+          mirrors:
+            docker.io:
+              endpoints:
+                - http://harbor.hsn.dev/v2/docker.io
+              overridePath: true
+            ghcr.io:
+              endpoints:
+                - http://harbor.hsn.dev/v2/ghcr.io
+              overridePath: true
 
         files:
           - op: create
@@ -151,6 +216,9 @@ controlPlane:
             rotate-server-certificates: "true"
           extraConfig:
             maxPods: 150
+          nodeIP:
+            validSubnets:
+                - 10.2.0.0/16
         sysctls:
           fs.inotify.max_user_watches: "1048576"
           fs.inotify.max_user_instances: "8192"
