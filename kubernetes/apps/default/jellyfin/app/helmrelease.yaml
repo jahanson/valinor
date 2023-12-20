@@ -83,7 +83,7 @@ spec:
             - name: config
               accessMode: ReadWriteOnce
               size: 50Gi
-              storageClass: local-hostpath
+              storageClass: ceph-block
               globalMounts:
                 - path: /config
     service:
