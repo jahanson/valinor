@@ -1,7 +1,7 @@
 ---
 clusterName: valinor
 
-talosVersion: v1.5.5
+talosVersion: v1.6.0
 kubernetesVersion: 1.28.4
 endpoint: "https://${clusterEndpointIP}:6443"
 
@@ -15,7 +15,7 @@ additionalMachineCertSans:
   - ${clusterEndpointIP}
 
 imageFactory:
-  registryURL: factory.hsn.dev
+  registryURL: factory.talos.dev
   schematicEndpoint: /schematics
   protocol: https
   installerURLTmpl: "{{.RegistryURL}}/installer/{{.ID}}:{{.Version}}"
