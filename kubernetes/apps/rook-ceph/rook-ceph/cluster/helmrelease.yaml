@@ -73,16 +73,18 @@ spec:
             cpu: "1000m"
             memory: "4Gi"
 
-    cephBlockPoolsVolumeSnapshotClass:
-      enabled: false
+    cephFileSystemVolumeSnapshotClass:
+      enabled: true
+      name: csi-ceph-filesystem
+      isDefault: false
+      deletionPolicy: Delete
 
     cephBlockPools:
       - name: ceph-blockpool
         spec:
           failureDomain: host
-          erasureCoded:
-            dataChunks: 2
-            codingChunks: 1
+          replicated:
+            size: 3
         storageClass:
           enabled: true
           name: ceph-block
