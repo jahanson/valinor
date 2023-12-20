@@ -1,10 +1,11 @@
 clusterName: ENC[AES256_GCM,data:iT5CwpMddw==,iv:st1ajjpRXQiHozpIJqUUwmRe542IiR2aWLEdqkk4W9k=,tag:KOCQ8x28kwNNDUXwOTpulg==,type:str]
-clusterEndpointIP: ENC[AES256_GCM,data:3oaQK/8A4H8=,iv:GUtz5qkZMy/mq+Qf2VkoxTJpoeC7F8ySJcmzcTcLEkY=,tag:8GsMnWRBptAhzSQ9IZxwbA==,type:str]
-auleIP: ENC[AES256_GCM,data:l+3uRMhfUDk=,iv:emxhDXyCKP9ijhxH4egI/3i+BCprcPf0AIVVi29GCGE=,tag:+0dl4A72vIgXdNlk5Etdug==,type:str]
-arlenIP: ENC[AES256_GCM,data:uXEM6zEuo40=,iv:eZMNksxYqpfYaY70yiJDOOnpOZ2cIfu4sE71irlUWOY=,tag:C0PjKj3FVDeLhUFInEQzLg==,type:str]
-eonweIP: ENC[AES256_GCM,data:zfIK5G67zEQ=,iv:xXPae345ybW9u6SX5eNHwEcBe+Y/7Gvzt6qWni3x+k4=,tag:hFO15lqDviJz+dnsa8IgMg==,type:str]
-niennaIP: ENC[AES256_GCM,data:3FRJBHRujl0=,iv:wd+Wp8DCXITYv4/Ys26+2GmeMXn0hvakxMUpDALqciE=,tag:P0Px35bWU0IzpH2H0i6dpA==,type:str]
-oromeIP: ENC[AES256_GCM,data:xSp35+pBlyk=,iv:Utk+kCiUKbSrx3kCsEtc90VRWEC9FSZJvJ1fvLZWc38=,tag:6uHW+BiOau9PUS2I2OnVGA==,type:str]
+clusterEndpointIP: ENC[AES256_GCM,data:nQcNkmmaLuOxz5tTKlY=,iv:IAnSXk667TSWcE2QDmE/xk56R6dCsNK5hMIY96BPN08=,tag:G1ebt6kfJ2V1WMfJ9zNBhA==,type:str]
+auleIP: ENC[AES256_GCM,data:fowDru5uo1tx36Y3vQ==,iv:wSPdnE+eQ+er2pCOvS2DoynCxA+4oNbJacQhvQR6KJk=,tag:Fb+D9nA3U/QbgqmQhDMDDw==,type:str]
+arlenIP: ENC[AES256_GCM,data:O3z2uYFNjS9iMng=,iv:b6T1AbWdIoFrH3hV1zop1C2x652sweKhgKPzUVNoDUY=,tag:d6edGxWSXtq9cpbcjIbtQw==,type:str]
+eonweIP: ENC[AES256_GCM,data:WdN3OPeVD0ppPax856w=,iv:QVhxp1Q3JPbHZAyZbwoBfmIu+qazvAQPKJR10RdtfFI=,tag:raJ2APpfNTyXLSH9SjzoGA==,type:str]
+niennaIP: ENC[AES256_GCM,data:XQCs/IoSGQIzBKe2Kw==,iv:P72qBaIHY8oLpfR+t5ZZ31XJE1kytCvav0I25nQKSWI=,tag:ZVbQHHzct2Y/fvHxAXROXQ==,type:str]
+oromeIP: ENC[AES256_GCM,data:nCeVxdK8Q1+E9nMoeNM=,iv:lqM72ewe+nwJUiJGOsLmGBtUU9JcxxmbEUZJNdFroWI=,tag:cpXvK0HW22mpy4nxWCgRmw==,type:str]
+nessaIP: ENC[AES256_GCM,data:ObyhvSX9MO1QWdoKTg==,iv:/8yilC5TMM4Act74CGKOrtQ81gx8El3TraM9gjAZvhM=,tag:B0di8HQ4D5MnUQZMbsBrng==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -20,8 +21,8 @@ sops:
             MTFUZEplYVN5RGhhMGNEcDlGbTVQcjQKktwztZAHGUqoxbGHuAg0dX5Vap+wFVfx
             ku6Hzg1ZU8Lvd8ODe+4p+RvHSKVll1akgpPVuymCUxl+I6EvH7gEDA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-12-12T17:44:15Z"
-    mac: ENC[AES256_GCM,data:bXullHomsdG80EKIVrghmPIkcQMzWX/gvM8w0iqWRbunC4SlNTzFIgrHvs1qYdyPqy+rC2NhhhWGBVSDEfAA5wRQ/xmLPmFP/z9hKsUiQqHUwZflu2taB2SLuhjMMHS2sKwcP3uPA1anPkvEjhx+IpGv9X92RHqr8YF1r2LhOVk=,iv:OQwhjxw/FI/S9pXS9/HHTFdFxIetKUPcESscfJNjkao=,tag:AhoPRZifwQVPRO38fA/LSQ==,type:str]
+    lastmodified: "2023-12-20T03:24:55Z"
+    mac: ENC[AES256_GCM,data:BOAlBO3vKmWjHebV/mbpw5cUBXYioruX33+EY/PNdGh3s97Us4z+H4Yqhs3M8EmGGmAK4GMCWAJYdTG5KcZSKJuYJGQOD+aOi90xODFk4p4h3WAPRvqBHb5E+lJ3gQomch0kMSHP5eGj2cCm7D/cl45W3MyBAsoBV5Jz5LchXaY=,iv:tyhZb0mD0WAitKHTT1sTLdNUw4c6yfYi88zNtdrPq0U=,tag:z6VGmWPwLKnKgS069GpYAw==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.8.1
