@@ -1,0 +1,108 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-wipe-nessa
+spec:
+  restartPolicy: Never
+  nodeName: nessa
+  containers:
+    - name: disk-wipe
+      image: ghcr.io/onedr0p/alpine:3.18.4@sha256:b0b6f6f42bf9649ccaf0e98cd74d5e123471e2c4a4db4a5ee417b18dde9973a9
+      securityContext:
+        privileged: true
+      resources: {}
+      env:
+        - name: CEPH_DISK
+          value: "/dev/nvme0n1"
+      command:
+        [
+          "/bin/sh",
+          "-c"
+        ]
+      args:
+        - apk add --no-cache sgdisk util-linux parted;
+          sgdisk --zap-all $CEPH_DISK;
+          blkdiscard $CEPH_DISK;
+          dd if=/dev/zero bs=1M count=1000 oflag=direct of=$CEPH_DISK;
+          partprobe $CEPH_DISK;
+      volumeMounts:
+        - mountPath: /mnt/host_var
+          name: host-var
+  volumes:
+    - name: host-var
+      hostPath:
+        path: /var
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-wipe-nienna
+spec:
+  restartPolicy: Never
+  nodeName: nienna
+  containers:
+    - name: disk-wipe
+      image: ghcr.io/onedr0p/alpine:3.18.4@sha256:b0b6f6f42bf9649ccaf0e98cd74d5e123471e2c4a4db4a5ee417b18dde9973a9
+      securityContext:
+        privileged: true
+      resources: {}
+      env:
+        - name: CEPH_DISK
+          value: "/dev/nvme0n1"
+      command:
+        [
+          "/bin/sh",
+          "-c"
+        ]
+      args:
+        - apk add --no-cache sgdisk util-linux parted;
+          sgdisk --zap-all $CEPH_DISK;
+          blkdiscard $CEPH_DISK;
+          dd if=/dev/zero bs=1M count=1000 oflag=direct of=$CEPH_DISK;
+          partprobe $CEPH_DISK;
+      volumeMounts:
+        - mountPath: /mnt/host_var
+          name: host-var
+  volumes:
+    - name: host-var
+      hostPath:
+        path: /var
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: disk-wipe-orome
+spec:
+  restartPolicy: Never
+  nodeName: orome
+  containers:
+    - name: disk-wipe
+      image: ghcr.io/onedr0p/alpine:3.18.4@sha256:b0b6f6f42bf9649ccaf0e98cd74d5e123471e2c4a4db4a5ee417b18dde9973a9
+      securityContext:
+        privileged: true
+      resources: {}
+      env:
+        - name: CEPH_DISK
+          value: "/dev/nvme0n1"
+
+      command:
+        [
+          "/bin/sh",
+          "-c"
+        ]
+      args:
+        - apk add --no-cache sgdisk util-linux parted;
+          sgdisk --zap-all $CEPH_DISK;
+          blkdiscard $CEPH_DISK;
+          dd if=/dev/zero bs=1M count=1000 oflag=direct of=$CEPH_DISK;
+          partprobe $CEPH_DISK;
+      volumeMounts:
+        - mountPath: /mnt/host_var
+          name: host-var
+  volumes:
+    - name: host-var
+      hostPath:
+        path: /var
