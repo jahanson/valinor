@@ -52,7 +52,7 @@ spec:
                   - key: role
                     operator: In
                     values:
-                    - storage-node
+                    - control-plane
 
 
 
