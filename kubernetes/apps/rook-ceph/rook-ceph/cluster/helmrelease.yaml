@@ -40,19 +40,19 @@ spec:
 
     cephClusterSpec:
       mon:
-        count: 3
+        count: 5
       network:
         provider: host
-      placement:
-        mon:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: role
-                    operator: In
-                    values:
-                    - control-plane
+      # placement:
+      #   mon:
+      #     nodeAffinity:
+      #       requiredDuringSchedulingIgnoredDuringExecution:
+      #         nodeSelectorTerms:
+      #           - matchExpressions:
+      #             - key: role
+      #               operator: In
+      #               values:
+      #               - control-plane
 
 
 
