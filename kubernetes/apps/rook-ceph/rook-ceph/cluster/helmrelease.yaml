@@ -41,6 +41,17 @@ spec:
     cephClusterSpec:
       network:
         provider: host
+      placement:
+        mon:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: node-role.kubernetes.io/control-plane
+                        operator: Exists
+
+
 
       crashCollector:
         disable: false
