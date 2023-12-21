@@ -76,7 +76,7 @@ spec:
               app.kubernetes.io/instance: ingress-nginx-hsn
               app.kubernetes.io/component: controller
       nodeSelector:
-        node-role.kubernetes.io/control-plane:
+        node-role.kubernetes.io/control-plane: ""
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
