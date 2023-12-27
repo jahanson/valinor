@@ -103,13 +103,6 @@ spec:
             equal: ["alertname", "namespace"]
       ingress:
         enabled: true
-        pathType: Prefix
-        ingressClassName: hsn-nginx
-        hosts:
-          - &host alert-manager.valinor.social
-        tls:
-          - hosts:
-              - *host
       alertmanagerSpec:
         replicas: 3
         storage:
