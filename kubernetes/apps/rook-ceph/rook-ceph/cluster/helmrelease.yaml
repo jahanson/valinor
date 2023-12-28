@@ -82,7 +82,7 @@ spec:
             devices:
               - name: /dev/disk/by-id/nvme-SAMSUNG_MZVL21T0HCLR-00B00_S676NU0W641201
                 config:
-                  metadataDevice: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2
+                  metadataDevice: nvme-SAMSUNG_MZVL21T0HCLR-00B00_S676NU0W641201
       resources:
         mgr:
           limits:
