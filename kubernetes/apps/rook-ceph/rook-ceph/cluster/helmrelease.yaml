@@ -71,15 +71,18 @@ spec:
           - name: "nienna"
             devices:
               - name: /dev/disk/by-id/nvme-SAMSUNG_MZVLB1T0HALR-00000_S3W6NA0M610693
-              # - name: /dev/disk/by-id/ata-ST16000NM001J-2TW113_ZR5E7NQR
+                config:
+                  metadataDevice: /dev/disk/by-id/ata-ST16000NM001J-2TW113_ZR5E7NQR
           - name: "orome"
             devices:
               - name: /dev/disk/by-id/nvme-SAMSUNG_MZVLB1T0HBLR-00000_S4GJNX0R613503
-              # - name: /dev/disk/by-id/ata-ST16000NM001J-2TW113_ZR6021Z3
+                config:
+                  metadataDevice: /dev/disk/by-id/ata-ST16000NM001J-2TW113_ZR6021Z3
           - name: "nessa"
             devices:
               - name: /dev/disk/by-id/nvme-SAMSUNG_MZVL21T0HCLR-00B00_S676NU0W641201
-              # - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2
+                config:
+                  metadataDevice: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2
       resources:
         mgr:
           limits:
