@@ -39,6 +39,7 @@ spec:
       bdev_async_discard = true
 
     cephClusterSpec:
+      removeOSDsIfOutAndSafeToRemove: true
       mon:
         count: 5
       network:
