@@ -29,6 +29,11 @@ spec:
     cluster:
       name: valinor
       id: 1
+    hubble:
+      relay:
+        enabled: true
+      ui:
+        enabled: true
     ipam:
       mode: kubernetes
     kubeProxyReplacement: true
