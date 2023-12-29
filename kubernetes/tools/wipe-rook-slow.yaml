@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: disk-wipe-nessa
+  name: disk-wipe-slow-nessa
 spec:
   restartPolicy: Never
   nodeName: nessa
@@ -37,7 +37,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: disk-wipe-nienna
+  name: disk-wipe-slow-nienna
 spec:
   restartPolicy: Never
   nodeName: nienna
@@ -72,7 +72,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: disk-wipe-orome
+  name: disk-wipe-slow-orome
 spec:
   restartPolicy: Never
   nodeName: orome
