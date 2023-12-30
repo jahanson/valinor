@@ -72,7 +72,7 @@ spec:
             devices:
               - name: /dev/disk/by-id/ata-ST16000NM001J-2TW113_ZR5E7NQR
                 config:
-                  metadataDevice: /dev/disk/by-id/nvme-SAMSUNG_MZVLB1T0HALR-00000_S3W6NA0M610693
+                  metadataDevice: /dev/disk/by-id/nvme-KXG60ZNV1T02_TOSHIBA_Z9FF70SCF9YL
           - name: "orome"
             devices:
               - name: /dev/disk/by-id/ata-ST16000NM001J-2TW113_ZR6021Z3
