@@ -84,12 +84,12 @@ nodes:
             - siderolabs/amd-ucode
             - siderolabs/qemu-guest-agent
     installDiskSelector:
-      busPath: /pci0000:00/0000:00:0a.0/virtio2/
+      busPath: /pci0000:00/0000:00:03.1/0000:27:00.0/nvme/nvme0/nvme0n1
     networkInterfaces:
       - interface: eth0
-        dhcp: true
-      - interface: eth1
         dhcp: false
+      - interface: eth1
+        dhcp: true
         vlans:
           - vlanId: 4010
             mtu: 1450
@@ -100,6 +100,8 @@ nodes:
               - network: 10.2.0.0/16
                 gateway: 10.2.1.1 # The route's gateway (if empty, creates link scope route).
                 metric: 2048
+      - interface: eth2
+        dhcp: false
   # VM AX41-Nvme - AMD Ryzen 5 3600 6-Core Processor (Zen2) - 64GB ECC RAM
   - hostname: nessa
     disableSearchDomain: true
@@ -112,7 +114,6 @@ nodes:
         systemExtensions:
           officialExtensions:
             - siderolabs/amd-ucode
-            - siderolabs/qemu-guest-agent
     installDiskSelector:
       busPath: /pci0000:00/0000:00:0a.0/virtio2/
     networkInterfaces:
