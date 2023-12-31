@@ -1,9 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: rocky-linux
+  name: rocky-nessa
   namespace: default
 spec:
+  nodeName: nessa
   containers:
     - name: rocky
       image: rockylinux:9
