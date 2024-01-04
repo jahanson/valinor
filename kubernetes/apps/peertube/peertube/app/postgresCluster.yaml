@@ -1,0 +1,78 @@
+---
+# yaml-language-server: $schema=https://ks.hsn.dev/postgres-operator.crunchydata.com/postgrescluster_v1beta1.json
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: peertube
+  namespace: peertube
+spec:
+  postgresVersion: 15
+  patroni:
+    dynamicConfiguration:
+      synchronous_mode: true
+      postgresql:
+        synchronous_commit: "on"
+        pg_hba:
+          - host peertube peertube 10.33.0.0/16 md5
+          - host all peertube 127.0.0.1 md5
+  # monitoring:
+  #   pgmonitor:
+  #     exporter:
+  #       image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.4.3-0
+
+  instances:
+    - name: postgres
+      replicas: 2
+      dataVolumeClaimSpec:
+        storageClassName: ceph-block
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+  users:
+    - name: peertube
+      databases:
+        - peertube
+      options: "SUPERUSER"
+  backups:
+    pgbackrest:
+      configuration:
+        - secret:
+            name: pgo-s3-creds
+      global:
+        archive-push-queue-max: 4GiB
+        repo1-retention-full: "14"
+        repo1-retention-full-type: time
+        repo1-path: /peertube/repo1
+        repo1-s3-uri-style: path
+      manual:
+        repoName: repo1
+        options:
+          - --type=full
+      repos:
+        - name: repo1
+          schedules:
+            full: "0 1 * * 0"
+            differential: "0 1 * * 1-6"
+valuesFrom:
+  - targetPath: backups.pgbackrest.repos.repo1.s3.bucket
+    kind: ConfigMap
+    name: pgo-peertube-backup-bucket-v1
+    valuesKey: BUCKET_NAME
+  - targetPath: backups.pgbackrest.repos.repo1.s3.endpoint
+    kind: ConfigMap
+    name: pgo-peertube-backup-bucket-v1
+    valuesKey: BUCKET_HOST
+  - targetPath: backups.pgbackrest.repos.repo1.s3.region
+    kind: ConfigMap
+    name: pgo-peertube-backup-bucket-v1
+    valuesKey: BUCKET_REGION
+  - targetPath: objstoreConfig.config.access_key
+    kind: Secret
+    name: pgo-peertube-backup-bucket-v1
+    valuesKey: AWS_ACCESS_KEY_ID
+  - targetPath: objstoreConfig.config.secret_key
+    kind: Secret
+    name: pgo-peertube-backup-bucket-v1
+    valuesKey: AWS_SECRET_ACCESS_KEY

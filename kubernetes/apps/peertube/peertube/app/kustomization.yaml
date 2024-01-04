@@ -1,0 +1,22 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization.json
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: peertube
+resources:
+  - ./externalsecret.yaml
+  # - ./helmrelease.yaml
+  # - ./ingress.yaml
+  - ./objectbucketclaim.yaml
+  - ./pvc.yaml
+configMapGenerator:
+  - name: peertube-configmap
+    files:
+      - config/production.yml
+  - name: peertube-nginx
+    files:
+      - config/nginx.conf
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
