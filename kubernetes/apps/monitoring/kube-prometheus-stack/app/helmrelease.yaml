@@ -102,7 +102,7 @@ spec:
               - severity = "warning"
             equal: ["alertname", "namespace"]
       ingress:
-        enabled: true
+        enabled: false
       alertmanagerSpec:
         replicas: 3
         storage:
