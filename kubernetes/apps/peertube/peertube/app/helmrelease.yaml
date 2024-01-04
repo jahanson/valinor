@@ -68,6 +68,25 @@ spec:
           http:
             port: &port-api 9000
 
+    ingress:
+      main:
+        enabled: true
+        className: "peertube-nginx"
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+          nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+        hosts:
+          - host: &host "khazadtube.tv"
+            paths:
+              - path: /
+                service:
+                  name: main
+                  port: http
+        tls:
+          - hosts:
+              - *host
+
     persistence:
       # config:
       #   enabled: true
