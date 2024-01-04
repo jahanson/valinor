@@ -55,24 +55,7 @@ spec:
           schedules:
             full: "0 1 * * 0"
             differential: "0 1 * * 1-6"
-valuesFrom:
-  - targetPath: backups.pgbackrest.repos.repo1.s3.bucket
-    kind: ConfigMap
-    name: pgo-peertube-backup-bucket-v1
-    valuesKey: BUCKET_NAME
-  - targetPath: backups.pgbackrest.repos.repo1.s3.endpoint
-    kind: ConfigMap
-    name: pgo-peertube-backup-bucket-v1
-    valuesKey: BUCKET_HOST
-  - targetPath: backups.pgbackrest.repos.repo1.s3.region
-    kind: ConfigMap
-    name: pgo-peertube-backup-bucket-v1
-    valuesKey: BUCKET_REGION
-  - targetPath: objstoreConfig.config.access_key
-    kind: Secret
-    name: pgo-peertube-backup-bucket-v1
-    valuesKey: AWS_ACCESS_KEY_ID
-  - targetPath: objstoreConfig.config.secret_key
-    kind: Secret
-    name: pgo-peertube-backup-bucket-v1
-    valuesKey: AWS_SECRET_ACCESS_KEY
+          s3:
+            bucket: "pgo-peertube-backup-v1"
+            endpoint: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc"
+            region: ""

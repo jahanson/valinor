@@ -26,16 +26,16 @@ spec:
         data:
           s3.conf: |
             [global]
-            repo1-s3-key={{ .minio_crunchy_postgres_access_key }}
-            repo1-s3-key-secret={{ .minio_crunchy_postgres_secret_key }}
+            repo1-s3-key={{ .pgo_crunchy_postgres_access_key }}
+            repo1-s3-key-secret={{ .pgo_crunchy_postgres_secret_key }}
 
     dataFrom:
       - extract:
-          key: minio
+          key: pgo-s3-creds
         rewrite:
           - regexp:
               source: "[-]"
               target: "_"
           - regexp:
               source: "(.*)"
-              target: "minio_$1"
+              target: "pgo_$1"
