@@ -8,6 +8,9 @@ spec:
   selector:
     matchLabels:
       postgres-operator.crunchydata.com/crunchy-postgres-exporter: "true"
+  namespaceSelector:
+    matchNames:
+      - peertube
   podMetricsEndpoints:
     - port: "9187"
       relabelings:
