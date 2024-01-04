@@ -59,7 +59,9 @@ spec:
                 initialDelaySeconds: 15
           nginx:
             image:
-              repository: docker.io/library/nginx:1.25.3-alpine
+              repository: docker.io/library/nginx
+              tag: 1.25.3-alpine
+              pullPolicy: Always
     service:
       main:
         ports:
