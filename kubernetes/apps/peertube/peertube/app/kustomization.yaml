@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: peertube
 resources:
   - ./externalsecret.yaml
-  # - ./helmrelease.yaml
+  - ./helmrelease.yaml
   # - ./ingress.yaml
   - ./postgresCluster.yaml
   - ./pvc.yaml
