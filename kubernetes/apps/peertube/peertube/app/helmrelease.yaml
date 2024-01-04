@@ -81,6 +81,11 @@ spec:
         name: peertube-nginx
         globalMounts:
           - path: /etc/nginx/conf.d
+      assets:
+        type: emptyDir
+        globalMounts:
+          - path: /assets
+
 
     resources:
       requests:
