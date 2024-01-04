@@ -13,7 +13,7 @@ spec:
       postgresql:
         synchronous_commit: "on"
         pg_hba:
-          - host peertube peertube 10.33.0.0/16 md5
+          - host peertube peertube 10.32.0.0/16 md5
           - host all peertube 127.0.0.1 md5
   # monitoring:
   #   pgmonitor:
