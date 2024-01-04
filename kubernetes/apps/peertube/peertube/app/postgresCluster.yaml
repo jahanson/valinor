@@ -13,8 +13,8 @@ spec:
       postgresql:
         synchronous_commit: "on"
         pg_hba:
-          - host peertube peertube 10.32.0.0/16 md5
-          - host all peertube 127.0.0.1 md5
+          - hostnossl all all 10.32.0.0/16 md5
+          - hostnossl all all all md5
   # monitoring:
   #   pgmonitor:
   #     exporter:
@@ -35,6 +35,8 @@ spec:
       databases:
         - peertube
       options: "SUPERUSER"
+      password:
+        type: AlphaNumeric
   backups:
     pgbackrest:
       configuration:
@@ -56,6 +58,6 @@ spec:
             full: "0 1 * * 0"
             differential: "0 1 * * 1-6"
           s3:
-            bucket: "pgo-peertube-backup-v1"
+            bucket: "crunchy-postgres"
             endpoint: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc"
             region: ""

@@ -8,7 +8,6 @@ resources:
   # - ./helmrelease.yaml
   # - ./ingress.yaml
   - ./postgresCluster.yaml
-  - ./objectbucketclaim.yaml
   - ./pvc.yaml
 configMapGenerator:
   - name: peertube-configmap

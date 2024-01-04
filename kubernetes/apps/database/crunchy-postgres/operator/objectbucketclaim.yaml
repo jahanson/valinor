@@ -3,8 +3,8 @@
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: pgo-peertube-backup-bucket-v1
+  name: crunchy-postgres
   namespace: monitoring
 spec:
-  bucketName: pgo-peertube-backup-v1
+  bucketName: crunchy-postgres
   storageClassName: ceph-bucket
