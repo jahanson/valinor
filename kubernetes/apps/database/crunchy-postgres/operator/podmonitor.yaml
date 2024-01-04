@@ -13,21 +13,21 @@ spec:
       - peertube
   podMetricsEndpoints:
     - port: "9187"
-      relabelings:
-        - sourceLabels: [__meta_kubernetes_pod_container_port_number]
-          action: keep
-          regex: "9187"
-        - sourceLabels: [__meta_kubernetes_namespace]
-          targetLabel: kubernetes_namespace
-        - sourceLabels: [__meta_kubernetes_pod_name]
-          targetLabel: pod
-        - sourceLabels: [__meta_kubernetes_namespace, __meta_kubernetes_pod_label_postgres_operator_crunchydata_com_cluster]
-          separator: ":"
-          targetLabel: pg_cluster
-          replacement: "$1$2"
-        - sourceLabels: [__meta_kubernetes_pod_ip]
-          targetLabel: ip
-        - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_instance]
-          targetLabel: deployment
-        - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_role]
-          targetLabel: role
+      # relabelings:
+      #   - sourceLabels: [__meta_kubernetes_pod_container_port_number]
+      #     action: keep
+      #     regex: "9187"
+      #   - sourceLabels: [__meta_kubernetes_namespace]
+      #     targetLabel: kubernetes_namespace
+      #   - sourceLabels: [__meta_kubernetes_pod_name]
+      #     targetLabel: pod
+      #   - sourceLabels: [__meta_kubernetes_namespace, __meta_kubernetes_pod_label_postgres_operator_crunchydata_com_cluster]
+      #     separator: ":"
+      #     targetLabel: pg_cluster
+      #     replacement: "$1$2"
+      #   - sourceLabels: [__meta_kubernetes_pod_ip]
+      #     targetLabel: ip
+      #   - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_instance]
+      #     targetLabel: deployment
+      #   - sourceLabels: [__meta_kubernetes_pod_label_postgres_operator_crunchydata_com_role]
+      #     targetLabel: role
