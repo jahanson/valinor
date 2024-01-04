@@ -15,10 +15,10 @@ spec:
         pg_hba:
           - hostnossl all all 10.32.0.0/16 md5
           - hostnossl all all all md5
-  # monitoring:
-  #   pgmonitor:
-  #     exporter:
-  #       image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.4.3-0
+  monitoring:
+    pgmonitor:
+      exporter:
+        image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-exporter:ubi8-5.5.0-0
 
   instances:
     - name: postgres
