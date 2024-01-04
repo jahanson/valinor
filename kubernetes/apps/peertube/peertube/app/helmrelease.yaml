@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.0.3
+      version: 2.4.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -22,6 +22,19 @@ spec:
       main:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          init-config:
+            image:
+              repository: docker.io/chocobozzz/peertube
+              tag: v6.0.2-bookworm
+            command:
+              - "/bin/sh"
+              - "-c"
+            args:
+              - cp /app/support/docker/production/config/* /config;
+                cp /app/config/default.yaml /config;
+                chown -R peertube:peertube /data /config;
+                cp -r /app/client/dist/* /assets/;
         containers:
           main:
             image:
@@ -44,6 +57,9 @@ spec:
                 failureThreshold: 3
                 periodSeconds: 30
                 initialDelaySeconds: 15
+          nginx:
+            image:
+              repository: docker.io/library/nginx:1.25.3-alpine
     service:
       main:
         ports:
@@ -51,18 +67,18 @@ spec:
             port: &port-api 9000
 
     persistence:
-      config:
+      # config:
+      #   enabled: true
+      #   type: configMap
+      #   name: peertube-configmap
+      #   globalMounts:
+      #     - path: /config
+      nginx-conf:
         enabled: true
         type: configMap
-        name: peertube-configmap
+        name: peertube-nginx
         globalMounts:
-          - path: /config
-      media:
-        existingClaim: nas-storage
-        advancedMounts:
-          main:
-            main:
-              - path: /data
+          - path: /etc/nginx/conf.d
 
     resources:
       requests:
