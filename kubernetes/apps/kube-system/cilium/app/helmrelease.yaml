@@ -45,7 +45,7 @@ spec:
     ipam:
       mode: kubernetes
     policyEnforcementMode: always    # enforce network policies
-    # policyAuditMode: true            # do not block traffic
+    policyAuditMode: true            # do not block traffic
     hostFirewall:
       enabled: true                  # enable host policies
     extraConfig:
