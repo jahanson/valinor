@@ -36,6 +36,13 @@ spec:
         enabled: true
     ipam:
       mode: kubernetes
+    policyEnforcementMode: always    # enforce network policies
+    policyAuditMode: true            # do not block traffic
+    hostFirewall:
+      enabled: true                  # enable host policies
+    extraConfig:
+      allow-localhost: policy        # enable policies for localhost
+
     kubeProxyReplacement: true
     securityContext:
       capabilities:
